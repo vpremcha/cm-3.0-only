@@ -1427,3 +1427,48 @@ function submitCancelDialog() {
     }
     submitForm('cancel', {}, false, true, fixLeftNavElementPositioningOnDialogClose);
 }
+
+/**
+ * This function is duplicate of isControlDirty function in krad.dirty.js.
+ * Here we fix the issue of handling the control dirty or not for Checkbox group and Radiobutton group
+ * by first checking whether the control is checkbox or radio which is not done in original function.
+ * This should be removed once the KRAD jira ??? is fixed
+ */
+DirtyFormState.prototype.isControlDirty = function (control) {
+    //assume dirty
+    var fieldDirty = true;
+
+    //checkbox or radio check
+    if ((control.type == "checkbox" || control.type == "radio")) {
+        if (control.defaultChecked != undefined && control.checked == control.defaultChecked) {
+            fieldDirty = false;
+        }
+    }
+    //basic input
+    else if (control.defaultValue != undefined && control.value == control.defaultValue) {
+        fieldDirty = false;
+    }
+    //select
+    else if (control.options != undefined) {
+        fieldDirty = false;
+        var hasDefaultSelected = false;
+        var options = jQuery(control).find("option");
+        jQuery(options).each(function () {
+            //if these differ the field is dirty
+            if (this.defaultSelected != this.selected) {
+                fieldDirty = true;
+            }
+
+            //check to see if any option was a default selection
+            hasDefaultSelected = this.defaultSelected || hasDefaultSelected;
+        });
+
+        //special case when no default value was selected when the control was rendered
+        if (!hasDefaultSelected &&
+            ((control.multiple && control.selectedIndex == -1) ||
+                (!control.multiple && control.selectedIndex == 0))) {
+            fieldDirty = false;
+        }
+    }
+    return fieldDirty;
+}
