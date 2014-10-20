@@ -47,6 +47,7 @@ import org.kuali.rice.krms.controller.RuleEditorController;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
 import org.kuali.student.cm.course.form.RecentlyViewedDocsUtil;
 import org.kuali.student.cm.course.service.ExportCourseHelper;
+import org.kuali.student.cm.maintenance.CMMaintainable;
 import org.kuali.student.cm.proposal.form.wrapper.ProposalElementsWrapper;
 import org.kuali.student.cm.proposal.form.wrapper.SupportingDocumentInfoWrapper;
 import org.kuali.student.cm.proposal.service.ProposalMaintainable;
@@ -164,6 +165,8 @@ public abstract class ProposalController extends RuleEditorController {
     @Override
     protected void loadDocument(DocumentFormBase form) throws WorkflowException {
         super.loadDocument(form);
+        CMMaintainable maintainable = (CMMaintainable)((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject();
+        maintainable.retrieveWrapperDataObject();
         // at this point we have the document type name set on the form so we use it to update the form specific fields
         updateFormElements(form);
     }

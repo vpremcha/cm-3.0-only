@@ -33,6 +33,7 @@ import org.kuali.student.cm.proposal.form.wrapper.ProposalElementsWrapper;
 import org.kuali.student.common.util.security.ContextUtils;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.RichTextInfo;
+import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.AttributeHelper;
 import org.kuali.student.r2.core.constants.KSKRMSServiceConstants;
 import org.kuali.student.r2.core.constants.ProposalServiceConstants;
@@ -77,14 +78,26 @@ public class RetireCourseMaintainableImpl extends CommonCourseMaintainableImpl i
 
     }
 
-    public void retrieveDataObject() {
-        super.retrieveDataObject();
+    public void retrieveWrapperDataObject(){
         try {
             RetireCourseWrapper dataObject = (RetireCourseWrapper) getDataObject();
             populateCourseAndReviewData(dataObject);
         } catch (Exception e) {
             throw new RuntimeException("Caught Exception while populating Course data", e);
         }
+    }
+    
+    public void retrieveDataObject() {
+        super.retrieveDataObject();
+        RetireCourseWrapper dataObject = (RetireCourseWrapper) getDataObject();
+        CourseInfo course = null;
+        try {
+            course = getCourseService().getCourse(getProposalInfo().getProposalReference().get(0), createContextInfo());
+            dataObject.setCourseInfo(course);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -104,10 +117,13 @@ public class RetireCourseMaintainableImpl extends CommonCourseMaintainableImpl i
      * @param courseWrapper The wrapper to populate.
      */
     public void populateWrapperData(RetireCourseWrapper courseWrapper) throws Exception {
-        CourseInfo course = getCourseService().getCourse(getProposalInfo().getProposalReference().get(0), createContextInfo());
-        courseWrapper.setCourseInfo(course);
 
-        courseWrapper.setRetireStartTerm(getTermDesc(course.getStartTerm()));
+        if (courseWrapper.getCourseInfo() == null) {
+            CourseInfo course = getCourseService().getCourse(getProposalInfo().getProposalReference().get(0), createContextInfo());
+            courseWrapper.setCourseInfo(course);
+        }
+
+        courseWrapper.setRetireStartTerm(getTermDesc(courseWrapper.getCourseInfo().getStartTerm()));
         // copy data from proposal to wrapper object
         courseWrapper.setRetireEndTerm(courseWrapper.getProposalInfo().getAttributeValue(CurriculumManagementConstants.PROPOSED_END_TERM));
 

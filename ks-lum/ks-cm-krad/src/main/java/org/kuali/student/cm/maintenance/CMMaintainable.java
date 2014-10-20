@@ -28,4 +28,6 @@ public interface CMMaintainable extends KSMaintainable {
 
     public void retrieveDataObject();
 
+    public void retrieveWrapperDataObject();
+
 }

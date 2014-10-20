@@ -71,8 +71,7 @@ import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.DtoConstants;
-import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
-import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.AttributeHelper;
 import org.kuali.student.r2.common.util.constants.LearningObjectiveServiceConstants;
 import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
@@ -1399,15 +1398,11 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         return subjectArea + suffixNumber;
     }
 
-    /**
-     * Loads the data object for the maintenance view.
-     */
-    public void retrieveDataObject() {
-        super.retrieveDataObject();
+    public void retrieveWrapperDataObject(){
 
         CourseInfoWrapper dataObject = (CourseInfoWrapper) getDataObject();
         try {
-            populateCourseAndReviewData(getProposalInfo().getProposalReference().get(0), dataObject);
+            populateCourseAndReviewData(dataObject,false);
         } catch (Exception e) {
             throw new RuntimeException("Caught Exception while populating Course data", e);
         }
@@ -1427,7 +1422,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
                 // kscm-2838 Check if current version has endTerm
                 if (currentVersion.getEndTerm() != null) {
                     // set the constraining term to current version's endTerm
-                     startTermConstrainingTermId = currentVersion.getEndTerm();
+                    startTermConstrainingTermId = currentVersion.getEndTerm();
                 }
                 else {
                     // kscm-2838  Current version has no endTerm, so set the constraining term  to current version's startTerm
@@ -1438,6 +1433,23 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
                 LOG.error("Could not get current course for version.", e);
             }
         }
+    }
+    /**
+     * Loads the data object for the maintenance view.
+     */
+    public void retrieveDataObject() {
+        super.retrieveDataObject();
+
+        CourseInfoWrapper dataObject = (CourseInfoWrapper) getDataObject();
+
+        CourseInfo course = null;
+        try {
+            course = getCourseService().getCourse(dataObject.getProposalInfo().getProposalReference().get(0), createContextInfo());
+            dataObject.setCourseInfo(course);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -1598,6 +1610,16 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
          populateCourseAndReviewData(courseId, courseWrapper, false);
     }
 
+    public void populateCourseAndReviewData(CourseInfoWrapper courseWrapper, boolean loadVersionData) throws Exception {
+
+        populateWrapperData(courseWrapper);
+
+        updateReview(courseWrapper, false);
+        if (loadVersionData) {
+            loadVersionData(courseWrapper);
+        }
+    }
+
     /**
      * Same as above, but adds the option to load version data.
      *
@@ -1611,12 +1633,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         courseWrapper.setCourseInfo(course);
 
-        populateWrapperData(courseWrapper);
-
-        updateReview(courseWrapper, false);
-        if (loadVersionData) {
-            loadVersionData(courseWrapper);
-        }
+        populateCourseAndReviewData(courseWrapper,loadVersionData);
     }
 
     /**
