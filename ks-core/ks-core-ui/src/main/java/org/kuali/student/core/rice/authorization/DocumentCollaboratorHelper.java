@@ -1,5 +1,6 @@
 package org.kuali.student.core.rice.authorization;
 
+import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.kew.api.KewApiConstants;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.WorkflowDocument;
@@ -164,7 +165,7 @@ public class DocumentCollaboratorHelper implements Serializable {
                     collaborator.setActionRequestStatus(actionRequest.getStatus().getLabel());
 
                     // we can only revoke an actionRequest that has not been satisfied by an actionTaken
-                    collaborator.setCanRevokeRequest(!actionRequest.isDone());
+                    collaborator.setCanRevokeRequest(!actionRequest.isDone() && !StringUtils.equals(GlobalVariables.getUserSession().getPrincipalId(), actionRequest.getPrincipalId()));
 
                     try {
                         Map<String,String> permissionDetails = new HashMap<String,String>();
