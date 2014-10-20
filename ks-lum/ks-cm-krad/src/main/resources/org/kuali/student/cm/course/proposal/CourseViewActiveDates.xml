@@ -106,7 +106,13 @@
                 <bean id="CM-Proposal-Course-ActiveDates-CurrentCourseEndTerm" parent="Uif-DataField"
                     p:label="Currently Active Version's End Term" p:propertyName="currentCourseEndTermShortName"
                     p:fieldLabel.renderColon="false"   p:forceSessionPersistence="true"
-                    p:render="@{#uiHelper.modifyWithNewVersionProposal}"/>
+                    p:render="@{#uiHelper.modifyWithNewVersionProposal}">
+                    <property name="fieldLabel.richLabelMessage">
+                        <bean parent="CM-IconLabelMessage">
+                            <property name="iconToolTipText" value="Date will default to term immediately preceding the Start Term selected or to the End Term already set if the Currently Active Version is Retired or Pilot."/>
+                        </bean>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
