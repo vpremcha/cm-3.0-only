@@ -871,6 +871,9 @@ function setupCharCountersForLo() {
     jQuery(".lo-charcount-max-500").jqEasyCounter({'maxChars':500, 'maxCharsWarning':450, 'msgTextAlign':'left'});
 }
 
+function setupCharCountersForComments() {
+    jQuery(".cm-charcount-max-4000").jqEasyCounter({'maxChars':4000, 'maxCharsWarning':3050, 'msgTextAlign':'left'});
+}
 
 function durationCountOnBlur() {
     validateFieldValue(jQuery("#CM-Proposal-Course-Logistics-DurationCount_control"));

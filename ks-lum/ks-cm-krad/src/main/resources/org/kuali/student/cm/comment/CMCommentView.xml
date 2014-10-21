@@ -54,7 +54,7 @@
             <list>
                 <!-- Display existing comments or a message indicating that there aren't any comments. Using a box section
   here so that both the tableCollectionSection and the simple Message can share the header. -->
-                <bean parent="Uif-VerticalBoxSection" p:onDocumentReadyScript="setReadonlyTextWidthForComment();">
+                <bean parent="Uif-VerticalBoxSection" p:onDocumentReadyScript="setReadonlyTextWidthForComment();setupCharCountersForComments();">
                     <property name="items">
                         <list>
                             <bean id="CM-Proposal-Course-Comment-NewComment" parent="Uif-InputField" p:propertyName="newComment"
@@ -62,7 +62,13 @@
                                 <property name="instructionalText"
                                           value="Comments posted here will be visible to anyone with view access to the proposal."/>
                                 <property name="control">
-                                    <bean parent="Uif-LargeTextAreaControl" p:cols="71"/>
+                                    <bean parent="Uif-LargeTextAreaControl" p:cols="71">
+                                        <property name="cssClasses">
+                                            <list merge="true">
+                                                <value>cm-charcount-max-4000</value>
+                                            </list>
+                                        </property>
+                                    </bean>
                                 </property>
                             </bean>
 
@@ -135,7 +141,8 @@
                                                           p:propertyName="commentInfo.commentText.plain">
                                                         <property name="control">
                                                             <bean parent="Uif-LargeTextAreaControl" p:cols="71"
-                                                                  p:readOnly="@{!#line.renderHelper.editInProgress}"/>
+                                                                  p:readOnly="@{!#line.renderHelper.editInProgress}"
+                                                                  p:additionalCssClasses="@{#line.renderHelper.editInProgress ? 'cm-charcount-max-4000' : ''}" />
                                                         </property>
                                                         <property name="cssClasses">
                                                             <list merge="true">
