@@ -9,17 +9,7 @@ import net.sf.ehcache.search.Results;
 import org.apache.commons.collections.keyvalue.MultiKey;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
-import org.kuali.student.r2.common.exceptions.CircularRelationshipException;
-import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
-import org.kuali.student.r2.common.exceptions.DependentObjectsExistException;
-import org.kuali.student.r2.common.exceptions.DoesNotExistException;
-import org.kuali.student.r2.common.exceptions.InvalidParameterException;
-import org.kuali.student.r2.common.exceptions.MissingParameterException;
-import org.kuali.student.r2.common.exceptions.OperationFailedException;
-import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
-import org.kuali.student.r2.common.exceptions.ReadOnlyException;
-import org.kuali.student.r2.common.exceptions.UnsupportedActionException;
-import org.kuali.student.r2.common.exceptions.VersionMismatchException;
+import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.infc.Status;
 import org.kuali.student.r2.core.class1.util.SearchCacheDecoratorUtil;
 import org.kuali.student.r2.core.search.dto.SearchRequestInfo;
@@ -28,8 +18,10 @@ import org.kuali.student.r2.lum.clu.dto.CluCluRelationInfo;
 import org.kuali.student.r2.lum.clu.dto.CluInfo;
 import org.kuali.student.r2.lum.clu.dto.CluSetInfo;
 import org.kuali.student.r2.lum.lu.entity.CluSet;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -160,6 +152,33 @@ public class CluServiceCacheDecorator extends CluServiceDecorator {
         }
 
         return result;
+    }
+
+    @Override
+    public CluInfo updateCluState(String cluId, String luState, ContextInfo context)
+            throws DataValidationErrorException, DoesNotExistException,
+            InvalidParameterException, MissingParameterException,
+            OperationFailedException, PermissionDeniedException, ReadOnlyException, VersionMismatchException {
+        CluInfo result = getNextDecorator().updateCluState(cluId, luState, context);
+        getCacheManager().getCache(CLU_CACHE_NAME).put(new Element(cluId, result));
+        SearchCacheDecoratorUtil.invalidateCache(getCacheManager().getCache(CLU_CACHE_NAME), CLU_SEARCH_KEY_PREFIX,
+                INVALIDATE_SEARCH_CACHE_ONLY_CONFIG_KEY, VERIFY_RESULTS_BEFORE_INVALIDATE_CONFIG_KEY, cluId, "lu.resultColumn.cluId");
+        return result;
+    }
+
+    @Override
+    public StatusInfo setCurrentCluVersion(String cluVersionId, Date currentVersionStart, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, IllegalVersionSequencingException, OperationFailedException, PermissionDeniedException, DataValidationErrorException {
+
+        StatusInfo statusInfo = getNextDecorator().setCurrentCluVersion(cluVersionId, currentVersionStart, context);
+
+        if (statusInfo.getIsSuccess()){
+            CluInfo cluInfo = getNextDecorator().getClu(cluVersionId,context);
+            getCacheManager().getCache(CLU_CACHE_NAME).put(new Element(cluInfo.getId(), cluInfo));
+            SearchCacheDecoratorUtil.invalidateCache(getCacheManager().getCache(CLU_CACHE_NAME), CLU_SEARCH_KEY_PREFIX,
+                    INVALIDATE_SEARCH_CACHE_ONLY_CONFIG_KEY, VERIFY_RESULTS_BEFORE_INVALIDATE_CONFIG_KEY, cluInfo.getId(), "lu.resultColumn.cluId");
+        }
+
+        return statusInfo;
     }
 
     @Override

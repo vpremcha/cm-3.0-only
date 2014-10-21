@@ -121,7 +121,7 @@ public class CourseServiceImpl implements CourseService {
 
         } catch (VersionMismatchException vme) {
             // Re-instantiate this exception with more descriptive error.
-            throw new VersionMismatchException("Course to be updated is not the current version.");
+            throw new VersionMismatchException("Course to be updated is not the current version.", vme);
 
         } catch (AssemblyException e) {
             LOG.error("Error disassembling course", e);
