@@ -15,7 +15,6 @@
                 <bean parent="KS-Uif-Page" p:disclosure.render="false">
                     <property name="items">
                         <list>
-                            <!--<bean parent="Uif-Label" p:labelText="Kuali Student Modules" p:renderColon="false" p:cssClasses="ks-student-home-page-header"/>-->
                             <bean parent="Uif-Label" p:labelText="Click a module to get started." p:renderColon="false" p:cssClasses="ks-student-home-area-instruction"/>
                             <ref bean="KS-StudentHome-Setup"/>
                         </list>
@@ -28,29 +27,6 @@
     <bean id="KS-StudentHome-Setup" parent="Uif-HorizontalBoxSection">
         <property name="items">
             <list>
-                <bean id="KS-StudentHome-Enrollment" parent="KS-Uif-Student-Home-Area" p:onClickScript="window.location.href='@{#ConfigProperties['application.url']}/kr-krad/launch?methodToCall=start&amp;viewId=enrollmentHomeView';">
-                    <property name="items">
-                        <list>
-                            <bean parent="KS-Uif-Student-Home-Area-Image">
-                                <property name="source" value="@{#ConfigProperties['ks.externalizable.images.url']}/homepage/enrollment.png"/>
-                            </bean>
-                            <bean parent="Uif-HeaderFour"/>
-                            <bean parent="KS-Uif-Student-Home-Area-App-Name" p:headerText="Enrollment" />
-                            <bean parent="Uif-Label" p:labelText="Create and Manage Course Offerings" p:renderColon="false" />
-                        </list>
-                    </property>
-                </bean>
-                <bean id="KS-StudentHome-CurriculumManagement" parent="KS-Uif-Student-Home-Area" p:onClickScript="window.location.href='@{#ConfigProperties['ks.lum.MainEntryPoint']}';">
-                    <property name="items">
-                        <list>
-                            <bean parent="KS-Uif-Student-Home-Area-Image">
-                                <property name="source" value="@{#ConfigProperties['ks.externalizable.images.url']}/homepage/cm.png"/>
-                            </bean>
-                            <bean parent="KS-Uif-Student-Home-Area-App-Name" p:headerText="Curriculum Management" />
-                            <bean parent="Uif-Label" p:labelText="Create and Manage Catalog Courses and Programs" p:renderColon="false" />
-                        </list>
-                    </property>
-                </bean>
                 <bean id="KS-StudentHome-CurriculumManagementKrad" parent="KS-Uif-Student-Home-Area" p:onClickScript="window.location.href='@{#ConfigProperties['application.url']}/kr-krad/cmHome?methodToCall=start&amp;viewId=curriculumHomeView';">
                     <property name="items">
                         <list>

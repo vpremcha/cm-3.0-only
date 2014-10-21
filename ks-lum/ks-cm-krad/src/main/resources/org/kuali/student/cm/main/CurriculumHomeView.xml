@@ -20,6 +20,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="KS-HomewardPathBreadcrumbs-Home" parent="Uif-BreadcrumbItem">
+        <property name="label" value="Home"/>
+        <property name="url.baseUrl" value="launch"/>
+        <property name="url.viewId" value="ksFunctionalHomeView"/>
+    </bean>
     <bean id="KS-CurriculumHome-View" parent="KS-Uif-FormView">
         <property name="id" value="curriculumHomeView" />
         <property name="headerText" value="Curriculum Management KRAD" />
