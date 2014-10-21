@@ -26,8 +26,14 @@ import org.kuali.student.common.uif.service.KSMaintainable;
  */
 public interface CMMaintainable extends KSMaintainable {
 
+    /**
+     * This method retrieves only the DTO from service layer whenever DocumentService tries to load the dataobject.
+     */
     public void retrieveDataObject();
 
+    /**
+     * This method loads all the data needed to display at the ui
+     */
     public void retrieveWrapperDataObject();
 
 }
