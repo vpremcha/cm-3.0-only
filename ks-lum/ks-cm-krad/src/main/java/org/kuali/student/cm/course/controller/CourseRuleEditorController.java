@@ -33,6 +33,7 @@ import org.kuali.rice.krms.util.AgendaUtilities;
 import org.kuali.rice.krms.util.KRMSConstants;
 import org.kuali.rice.krms.util.PropositionTreeUtil;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
+import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
 import org.kuali.student.cm.course.form.wrapper.CourseInfoWrapper;
 import org.kuali.student.cm.course.service.CourseMaintainable;
 import org.kuali.student.cm.course.service.impl.CourseMaintainableImpl;
@@ -113,7 +114,7 @@ public abstract class CourseRuleEditorController extends ProposalController {
 
         CourseInfoWrapper courseInfoWrapper = (CourseInfoWrapper)((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
         form.getActionParameters().put(UifParameters.NAVIGATE_TO_PAGE_ID, CurriculumManagementConstants.CoursePageIds.CREATE_COURSE_PAGE);
-        courseInfoWrapper.getUiHelper().setSelectedSection(CurriculumManagementConstants.CourseViewSections.getSection(CurriculumManagementConstants.CourseViewSections.COURSE_REQUISITES.getSectionId()));
+        ((ProposalMaintenanceForm)form).setSelectedSection(CurriculumManagementConstants.CourseViewSections.getSection(CurriculumManagementConstants.CourseViewSections.COURSE_REQUISITES.getSectionId()));
         return super.cancelEditRule(form, result, request, response);
     }
 
@@ -151,7 +152,7 @@ public abstract class CourseRuleEditorController extends ProposalController {
         agendaEditor.getRuleEditors().put(ruleEditor.getKey(), ruleEditor);
         courseInfoWrapper.setAgendaDirty(true);
 
-        courseInfoWrapper.getUiHelper().setSelectedSection(CurriculumManagementConstants.CourseViewSections.COURSE_REQUISITES);
+        ((ProposalMaintenanceForm)form).setSelectedSection(CurriculumManagementConstants.CourseViewSections.COURSE_REQUISITES);
 
         return getUIFModelAndView(form, CurriculumManagementConstants.CoursePageIds.CREATE_COURSE_PAGE);
     }

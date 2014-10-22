@@ -45,6 +45,7 @@ import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.kuali.rice.krms.controller.RuleEditorController;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
+import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
 import org.kuali.student.cm.course.form.RecentlyViewedDocsUtil;
 import org.kuali.student.cm.course.service.ExportCourseHelper;
 import org.kuali.student.cm.maintenance.CMMaintainable;
@@ -105,7 +106,7 @@ public abstract class ProposalController extends RuleEditorController {
      */
     @Override
     protected MaintenanceDocumentForm createInitialForm(HttpServletRequest request) {
-        MaintenanceDocumentForm form = new MaintenanceDocumentForm();
+        ProposalMaintenanceForm form = new ProposalMaintenanceForm();
 
         String useReviewProcessParam = request.getParameter(CurriculumManagementConstants.UrlParams.USE_CURRICULUM_REVIEW);
         // only do the manually setup of the MaintenanceDocumentForm fields if the USE_CURRICULUM_REVIEW param was passed in from initial view
@@ -416,7 +417,7 @@ public abstract class ProposalController extends RuleEditorController {
      * @return The new {@link ModelAndView} that contains the newly created/updated {@ProposalInfo} information.
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=saveProposal")
-    public ModelAndView saveProposal(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, BindingResult result,
+    public ModelAndView saveProposal(@ModelAttribute("KualiForm") ProposalMaintenanceForm form, BindingResult result,
                                      HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ProposalElementsWrapper proposalElementsWrapper = getProposalElementsWrapper(form);
@@ -438,9 +439,9 @@ public abstract class ProposalController extends RuleEditorController {
         String nextOrCurrentPage = form.getActionParameters().get("displayPage");
 
         if (StringUtils.equalsIgnoreCase(nextOrCurrentPage, "NEXT")) {
-            CurriculumManagementConstants.UserInterfaceSections nextSection = getNextSection(proposalElementsWrapper.getUiHelper().getSelectedSection());
+            CurriculumManagementConstants.UserInterfaceSections nextSection = getNextSection(form.getSelectedSection());
             if (nextSection != null) {
-                proposalElementsWrapper.getUiHelper().setSelectedSection(nextSection);
+                form.setSelectedSection(nextSection);
             }
             return getUIFModelAndView(form);
         } else if (StringUtils.equalsIgnoreCase(nextOrCurrentPage, getReviewProposalLinkBeanId())) {
@@ -458,7 +459,7 @@ public abstract class ProposalController extends RuleEditorController {
     @RequestMapping(params = "methodToCall=cancel")
     public ModelAndView cancel(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-        DocumentFormBase documentForm = (DocumentFormBase) form;
+        ProposalMaintenanceForm documentForm = (ProposalMaintenanceForm) form;
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.CANCEL_PROPOSAL_CONFIRMATION_DIALOG;
         if (!hasDialogBeenDisplayed(dialog, documentForm)) {
             return showDialog(dialog, documentForm, request, response);
@@ -480,10 +481,10 @@ public abstract class ProposalController extends RuleEditorController {
                     performWorkflowAction(documentForm, UifConstants.WorkflowAction.CANCEL, false);
 
                     // setShowMessage boolean decides whether to show the error message or not
-                    proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                    documentForm.setShowMessage(false);
                     documentForm.getDialogManager().removeDialog(dialog);
                     // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                    proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                    documentForm.setPendingWorkflowAction(true);
                     documentForm.setPageId(getReviewPageKradPageId());
                     documentForm.setMethodToCall(KRADConstants.DOC_HANDLER_METHOD);
                     String href = buildProposalUrl(KRADConstants.DOC_HANDLER_METHOD, getReviewPageKradPageId(), documentForm.getDocument().getDocumentNumber(), proposalElementsWrapper.getProposalInfo().getTypeKey());
@@ -531,7 +532,7 @@ public abstract class ProposalController extends RuleEditorController {
                     form.getDialogManager().removeDialog(dialog);
                     ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
                     // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                    proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                    ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     return modelAndView;
                 } else {
                     form.getDialogManager().removeDialog(dialog);
@@ -563,7 +564,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.APPROVE_CONFIRMATION_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             doValidationForProposal(form, KewApiConstants.ROUTE_HEADER_PROCESSED_CD, DtoConstants.STATE_ACTIVE);
@@ -584,17 +585,17 @@ public abstract class ProposalController extends RuleEditorController {
 
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.APPROVE.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Set the request redirect to false so that the user stays on the same page
                         form.setRequestRedirected(false);
 
                         // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     } else {
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
                 } else {
@@ -627,7 +628,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.REJECT_CONFIRMATION_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             if (!GlobalVariables.getMessageMap().hasErrors()) {
@@ -646,16 +647,16 @@ public abstract class ProposalController extends RuleEditorController {
 
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.REJECT.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Set the request redirect to false so that the user stays on the same page
                         form.setRequestRedirected(false);
                         // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     } else {
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
                 } else {
@@ -685,7 +686,7 @@ public abstract class ProposalController extends RuleEditorController {
         // Set the request redirect to false so that the user stays on the same page
         form.setRequestRedirected(false);
         // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
         return getUIFModelAndView(form);
 
     }
@@ -712,7 +713,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.ACKNOWLEDGE_CONFIRMATION_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             if (!GlobalVariables.getMessageMap().hasErrors()) {
@@ -731,15 +732,15 @@ public abstract class ProposalController extends RuleEditorController {
 
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.ACKNOWLEDGE.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Set the request redirect to false so that the user stays on the same page
                         form.setRequestRedirected(false);
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     } else {
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
                 } else {
@@ -766,7 +767,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.BLANKET_APPROVE_CONFIRMATION_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             doValidationForProposal(form, KewApiConstants.ROUTE_HEADER_PROCESSED_CD, DtoConstants.STATE_ACTIVE);
@@ -787,15 +788,15 @@ public abstract class ProposalController extends RuleEditorController {
 
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.BLANKET_APPROVE.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Set the request redirect to false so that the user stays on the same page
                         form.setRequestRedirected(false);
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     } else {
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
 
@@ -831,7 +832,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.RETURN_TO_PREVIOUS_NODE_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             doValidationForProposal(form, KewApiConstants.ROUTE_HEADER_PROCESSED_CD, null);
@@ -849,14 +850,14 @@ public abstract class ProposalController extends RuleEditorController {
                         performCustomWorkflowAction(form, result, request, response, CurriculumManagementConstants.WorkflowActions.RETURN_TO_PREVIOUS);
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.RETURN_TO_PREVIOUS.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     }else{
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
                     /*
@@ -894,7 +895,7 @@ public abstract class ProposalController extends RuleEditorController {
         }
 
         ProposalElementsWrapper proposalElementsWrapper = (ProposalElementsWrapper) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject().getDataObject();
-        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+        ((ProposalMaintenanceForm)form).setShowMessage(false);
         String dialog = CurriculumManagementConstants.ProposalConfirmationDialogs.WITHDRAW_CONFIRMATION_DIALOG;
         if ( ! hasDialogBeenDisplayed(dialog, form)) {
             doValidationForProposal(form, KewApiConstants.ROUTE_HEADER_ENROUTE_CD, null);
@@ -912,16 +913,16 @@ public abstract class ProposalController extends RuleEditorController {
                         performCustomWorkflowAction(form, result, request, response, CurriculumManagementConstants.WorkflowActions.WITHDRAW);
                         addDecisionRationale(proposalElementsWrapper.getProposalInfo().getId(), proposalElementsWrapper.getUiHelper().getDialogExplanations().get(dialog), CommentServiceConstants.WORKFLOW_DECISIONS.WITHDRAW.getType());
                         // setShowMessage boolean decides whether to show the error message or not
-                        proposalElementsWrapper.getUiHelper().setShowMessage(false);
+                        ((ProposalMaintenanceForm)form).setShowMessage(false);
                         form.getDialogManager().removeDialog(dialog);
                         // Set the request redirect to false so that the user stays on the same page
                         form.setRequestRedirected(false);
                         // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-                        proposalElementsWrapper.getUiHelper().setPendingWorkflowAction(true);
+                        ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
                     } else {
                         form.getDialogManager().removeDialog(dialog);
                         form.setDialogResponse(null);
-                        proposalElementsWrapper.getUiHelper().setShowMessage(true);
+                        ((ProposalMaintenanceForm)form).setShowMessage(true);
                         return showDialog(dialog, form, request, response);
                     }
 
@@ -1031,15 +1032,15 @@ public abstract class ProposalController extends RuleEditorController {
      * Load the proposal edit page
      */
     @RequestMapping(params = "methodToCall=editProposalPage")
-    public ModelAndView editProposalPage(@ModelAttribute("KualiForm") DocumentFormBase form, BindingResult result,
+    public ModelAndView editProposalPage(@ModelAttribute("KualiForm") ProposalMaintenanceForm form, BindingResult result,
                                          HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String displaySectionId = form.getActionParameters().get("displaySection");
         ProposalElementsWrapper wrapper = getProposalElementsWrapper(form);
         if (displaySectionId == null) {
-            wrapper.getUiHelper().setSelectedSection(getDefaultSectionKradIdForEdit());
+            form.setSelectedSection(getDefaultSectionKradIdForEdit());
         } else {
-            wrapper.getUiHelper().setSelectedSection(getSectionById(displaySectionId));
+            form.setSelectedSection(getSectionById(displaySectionId));
         }
 
         return getUIFModelAndView(form, getKradPageIdForEdit());

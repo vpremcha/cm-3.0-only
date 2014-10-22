@@ -620,7 +620,7 @@
     </bean>
 
     <bean id="CM-DecisionRationale-MessageSection" parent="Uif-HorizontalBoxSection">
-        <property name="render" value="@{#uiHelper.showMessage}"/>
+        <property name="render" value="@{#form.showMessage}"/>
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>

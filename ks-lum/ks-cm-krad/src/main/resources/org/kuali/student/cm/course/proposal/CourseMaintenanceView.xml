@@ -506,7 +506,7 @@
             </list>
         </property>
         <property name="onDocumentReadyScript"
-                  value="onCourseLoad(@{#uiHelper.curriculumSpecialistUser}, '@{#uiHelper.selectedSection.sectionId}')"/>
+                  value="onCourseLoad(@{#uiHelper.curriculumSpecialistUser}, '@{#form.selectedSection.sectionId}')"/>
         <property name="items">
             <list>
                 <bean parent="Uif-TabGroup" p:id="course_tabs" >
@@ -529,7 +529,7 @@
                     </property>
                     <property name="tabsWidget.templateOptionsJSString">
                         <value>
-                            { selected: @{#uiHelper.selectedSection.ordinal() - 1} }
+                            { selected: @{#form.selectedSection.ordinal() - 1} }
                         </value>
                     </property>
                     <property name="tabsWidget.position" value="LEFT"/>

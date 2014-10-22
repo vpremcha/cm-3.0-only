@@ -35,6 +35,7 @@ import org.kuali.rice.krad.web.form.DocumentFormBase;
 import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
 import org.kuali.student.cm.common.util.CMUtils;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
+import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
 import org.kuali.student.cm.course.form.wrapper.CluInstructorInfoWrapper;
 import org.kuali.student.cm.course.form.wrapper.CourseCreateUnitsContentOwner;
 import org.kuali.student.cm.course.form.wrapper.CourseInfoWrapper;
@@ -440,7 +441,7 @@ public class CourseController extends CourseRuleEditorController {
      * Load the course proposal review page
      */
     @RequestMapping(params = "methodToCall=editProposalPage")
-    public ModelAndView editProposalPage(@ModelAttribute("KualiForm") DocumentFormBase form, BindingResult result,
+    public ModelAndView editProposalPage(@ModelAttribute("KualiForm")ProposalMaintenanceForm form, BindingResult result,
                                          HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         CourseInfoWrapper wrapper = getCourseInfoWrapper(form);
@@ -450,7 +451,7 @@ public class CourseController extends CourseRuleEditorController {
 
         // If it's a compare view, we need to cleanup fake collection objects used for compare
         if (((MaintenanceDocumentForm) form).getDocument().getOldMaintainableObject().getDataObject() != null){
-            CourseMaintainable maintainable = (CourseMaintainable)((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject();
+            CourseMaintainable maintainable = (CourseMaintainable)form.getDocument().getNewMaintainableObject();
             maintainable.cleanUpCompareObjects(wrapper);
         }
 
@@ -514,7 +515,7 @@ public class CourseController extends CourseRuleEditorController {
      */
     @MethodAccessible
     @RequestMapping(params = "methodToCall=saveModifyVersion")
-    public ModelAndView saveModifyVersion(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, BindingResult result,
+    public ModelAndView saveModifyVersion(@ModelAttribute("KualiForm") ProposalMaintenanceForm form, BindingResult result,
                                        HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = saveProposal(form, result, request, response);
 
@@ -561,7 +562,7 @@ public class CourseController extends CourseRuleEditorController {
             // Set the request redirect to false so that the user stays on the same page
             form.setRequestRedirected(false);
             // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-            courseInfoWrapper.getUiHelper().setPendingWorkflowAction(true);
+            ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
             //redirect back to client to display confirm dialog
             return getUIFModelAndView(form, getReviewPageKradPageId());
         } else {

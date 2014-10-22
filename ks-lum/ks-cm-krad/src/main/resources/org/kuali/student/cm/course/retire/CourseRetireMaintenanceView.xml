@@ -209,7 +209,7 @@
             </list>
         </property>
         <property name="onDocumentReadyScript"
-                  value="onCourseRetireLoad(@{#uiHelper.curriculumSpecialistUser}, '@{#uiHelper.selectedSection.sectionId}')"/>
+                  value="onCourseRetireLoad(@{#uiHelper.curriculumSpecialistUser}, '@{#form.selectedSection.sectionId}')"/>
         <property name="propertyReplacers">
             <list>
                 <bean parent="Uif-ConditionalBeanPropertyReplacer" p:propertyName="items"
@@ -236,7 +236,7 @@
                     </property>
                     <property name="tabsWidget.templateOptionsJSString">
                         <value>
-                            { selected: @{#uiHelper.selectedSection.ordinal() - 1} }
+                            { selected: @{#form.selectedSection.ordinal() - 1} }
                         </value>
                     </property>
                     <property name="tabsWidget.position" value="LEFT"/>

@@ -148,9 +148,9 @@ public abstract class ProposalElementsWrapper extends LURuleManagementWrapper im
         // TODO: Remove this workaround class once KS has been updated to Rice 2.5 (https://jira.kuali.org/browse/KSCM-2560)
         public static final String DIALOG_EXPLANATIONS_PROPERTY = "dialogExplanations";
 
-        private boolean showMessage;
-
-        CurriculumManagementConstants.UserInterfaceSections selectedSection;
+        // TODO: Remove this workaround class once KS has been updated to Rice 2.5 (https://jira.kuali.org/browse/KSCM-2560)
+        @RequestAccessible
+        protected Map<String,String> dialogExplanations;
 
         // disallow the curriculumSpecialistUser property to be set by the request
         @RequestProtected
@@ -164,33 +164,8 @@ public abstract class ProposalElementsWrapper extends LURuleManagementWrapper im
 
         private boolean modifyWithoutNewVersionProposal = false;
 
-        // TODO: Remove this workaround class once KS has been updated to Rice 2.5 (https://jira.kuali.org/browse/KSCM-2560)
-        @RequestAccessible
-        Map<String,String> dialogExplanations;
-
-        // Disallows any workflow action being taken against the document immediately after a workflow action has been performed
-        boolean pendingWorkflowAction = false;
-
-        public boolean isPendingWorkflowAction() {
-            return pendingWorkflowAction;
-        }
-
-        public void setPendingWorkflowAction(boolean pendingWorkflowAction) {
-            this.pendingWorkflowAction = pendingWorkflowAction;
-        }
-
-        public boolean isShowMessage() {
-            return showMessage;
-        }
-
-        public void setShowMessage(boolean showMessage) {
-            this.showMessage = showMessage;
-        }
-
         public ProposalUIHelper(boolean curriculumSpecialistUser, CurriculumManagementConstants.UserInterfaceSections selectedSection) {
             this.curriculumSpecialistUser = curriculumSpecialistUser;
-            this.selectedSection = selectedSection;
-            dialogExplanations = new HashMap<>();
         }
 
         /**
@@ -224,14 +199,6 @@ public abstract class ProposalElementsWrapper extends LURuleManagementWrapper im
             this.modifyWithoutNewVersionProposal = modifyWithoutNewVersionProposal;
         }
 
-        public Map<String, String> getDialogExplanations() {
-            return dialogExplanations;
-        }
-
-        public void setDialogExplanations(Map<String, String> dialogExplanations) {
-            this.dialogExplanations = dialogExplanations;
-        }
-
         public void setCurriculumSpecialistUser(boolean curriculumSpecialistUser) {
             this.curriculumSpecialistUser = curriculumSpecialistUser;
         }
@@ -252,12 +219,12 @@ public abstract class ProposalElementsWrapper extends LURuleManagementWrapper im
             this.useReviewProcess = useReviewProcess;
         }
 
-        public CurriculumManagementConstants.UserInterfaceSections getSelectedSection() {
-            return selectedSection;
+        public Map<String, String> getDialogExplanations() {
+            return dialogExplanations;
         }
 
-        public void setSelectedSection(CurriculumManagementConstants.UserInterfaceSections selectedSection) {
-            this.selectedSection = selectedSection;
+        public void setDialogExplanations(Map<String, String> dialogExplanations) {
+            this.dialogExplanations = dialogExplanations;
         }
 
         public String getHeaderText() {

@@ -35,6 +35,7 @@ import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.kuali.student.cm.common.util.CMUtils;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
+import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
 import org.kuali.student.cm.course.form.wrapper.RetireCourseWrapper;
 import org.kuali.student.cm.course.service.CommonCourseMaintainable;
 import org.kuali.student.cm.course.service.ExportCourseHelper;
@@ -292,7 +293,7 @@ public class RetireCourseController extends ProposalController {
             // Set the request redirect to false so that the user stays on the same page
             form.setRequestRedirected(false);
             // Hide all the workflow action buttons on the review proposal page while the document is still in Enroute state(It is being processed at the back-end)
-            retireCourseWrapper.getUiHelper().setPendingWorkflowAction(true);
+            ((ProposalMaintenanceForm)form).setPendingWorkflowAction(true);
             ((RetireCourseMaintainable) ((MaintenanceDocumentForm) form).getDocument().getNewMaintainableObject()).updateReview();
             //redirect back to client to display confirm dialog
             return getUIFModelAndView(form, getReviewPageKradPageId());
