@@ -53,7 +53,7 @@ public class DocumentCollaboratorHelper implements Serializable {
     private static PermissionService permissionService;
 
     private static final long serialVersionUID = 1L;
-    private final static Logger LOG = LoggerFactory.getLogger(CollaboratorHelperGwt.class);
+    private final static Logger LOG = LoggerFactory.getLogger(DocumentCollaboratorHelper.class);
 
     public static void addCollaborator(String docId, String dataId, String recipientPrincipalId, String selectedPermissionCode, String actionRequestTypeCode, boolean participationRequired, String actionRequestLabel, String actionRequestResponsibilityDescription) throws OperationFailedException {
         if (getWorkflowDocumentActionsService() == null) {

@@ -62,8 +62,7 @@
 	<param name="ks.rice.application.url">http://localhost:8081/ks-with-rice-bundled-dev</param>
 	<param name="ks.rice.actionList.serviceAddress">${ks.rice.application.url}/kew/ActionList.do</param>
     <param name="ks.rice.docSearch.serviceAddress">${ks.rice.application.url}/kew/DocumentSearch.do</param>
-    <param name="ks.gwt.codeServer">gwt.codesvr=127.0.0.1:9997</param>
-    
+
     <param name="rice.ksb.registry.serviceUrl" override="false">${ks.rice.application.url}/remoting/soap/ksb/v2_0/serviceRegistry</param>
   	<param name="rice.ksb.serviceRegistry.security" override="false">true</param>
   	<param name="rice.ksb.config.allowSelfSignedSSL" override="false">false</param>

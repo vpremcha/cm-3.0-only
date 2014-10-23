@@ -1,10 +1,7 @@
-The aggregate project uses svn:externals to map other KS modules into this module
-when checking out the source tree.
+This code started out as a fork of Kuali Student ks-aggregate/trunk. Everything was imported imported except the contents
+of the Impex MPX files which were very large. Those can be recreated by doing the manual impex procedure. It also contains
+all of the commit history from Subversion.
 
-The svn.externals file (indirectly) controls what local directories appear
-in the checkout, and what actual location inside Subversion they represent
-(by tying in with the svn:externals property).
+A tag was created immediately after import called "Initial".
 
-Even though this directory appears to be blank when browsing it over http, Subversion clients
-will detect the svn:externals definitions and checkout the mapped locations when checking out
-the top level project.
+Subsequently, all code not related to Curriculum Management has been removed.

@@ -63,11 +63,7 @@
         <eclipselink.version>1.0</eclipselink.version>
         <ehcache.version>2.5.0</ehcache.version>
         <elasticsearch.version>1.2.2</elasticsearch.version>
-        <google.gwtx.version>1.5.3</google.gwtx.version>
         <groovy.version>2.2.1</groovy.version>
-        <gwt.codehaus.plugin.version>2.3.0-1</gwt.codehaus.plugin.version>
-        <gwt.incubator.version>2.3.0</gwt.incubator.version>
-        <gwt.version>2.3.0</gwt.version>
         <hamcrest.version>1.3</hamcrest.version>
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
         <hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
@@ -130,21 +126,13 @@
         <kuali.javadoc.link.7>http://site.kuali.org/rice/${kuali.rice.version}/apidocs/</kuali.javadoc.link.7>
         <kuali.javadoc.link.8>http://logging.apache.org/log4j/${log4j.javadoc.version}/apidocs/</kuali.javadoc.link.8>
         <kuali.javadoc.link.9>http://ws.apache.org/wss4j/apidocs/</kuali.javadoc.link.9>
-        <!-- gwt properties -->
-        <ks.gwt.compile.draftCompile>false</ks.gwt.compile.draftCompile>
-        <ks.gwt.compile.force>false</ks.gwt.compile.force>
-        <ks.gwt.compile.soyc>false</ks.gwt.compile.soyc>
-        <ks.gwt.compile.style>OBF</ks.gwt.compile.style>
-        <!-- gwt modules to build -->
-        <ks.gwt.module.lum>org.kuali.student.lum.lu.ui.main.LUMMain</ks.gwt.module.lum>
-        <ks.gwt.module.org>org.kuali.student.core.organization.ui.OrgEntry</ks.gwt.module.org>
+
         <!-- phases -->
         <ks.contractdoc.phase>site</ks.contractdoc.phase>
         <ks.dictionarydoc.phase>site</ks.dictionarydoc.phase>
         <ks.dictionarycreate.phase>none</ks.dictionarycreate.phase>
         <ks.enforcer.phase>validate</ks.enforcer.phase>
         <ks.java2ws.phase>none</ks.java2ws.phase>
-        <ks.gwt.compile.phase>process-classes</ks.gwt.compile.phase>
         <ks.mockimpl.phase>none</ks.mockimpl.phase>
         <ks.jpaimpl.phase>none</ks.jpaimpl.phase>
         <!-- should align to the same or earlier phase than the contract doc or dictionary doc phase -->
@@ -287,22 +275,6 @@
                     <configuration>
                         <!-- Don't compile sources that are in jars -->
                         <compilerArgument>-implicit:none</compilerArgument>
-                    </configuration>
-                </plugin>
-                <!-- Codehaus GWT Maven Plugin Configuration -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>gwt-maven-plugin</artifactId>
-                    <version>${gwt.codehaus.plugin.version}</version>
-                    <configuration>
-                        <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
-                        <buildOutputDirectory>${project.build.directory}/${project.artifactId}-webapp/WEB-INF/classes</buildOutputDirectory>
-                        <hostedWebapp>${project.build.directory}/${project.artifactId}-webapp</hostedWebapp>
-                        <extraJvmArgs>-Xss32m -Xmx1g</extraJvmArgs>
-                        <style>${ks.gwt.compile.style}</style>
-                        <soycDetailed>${ks.gwt.compile.soyc}</soycDetailed>
-                        <draftCompile>${ks.gwt.compile.draftCompile}</draftCompile>
-                        <force>${ks.gwt.compile.force}</force>
                     </configuration>
                 </plugin>
                 <!-- CXF Java2WS Default Configuration -->
@@ -494,18 +466,6 @@
                 <groupId>org.kuali.rice</groupId>
                 <artifactId>rice-kim-api</artifactId>
                 <version>${kuali.rice.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gwtx</groupId>
-                <artifactId>gwtx</artifactId>
-                <version>${google.gwtx.version}</version>
-                <scope>provided</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.gwt</groupId>
-                        <artifactId>gwt-user</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -1196,13 +1156,6 @@
                         <groupId>javax.xml.bind</groupId>
                         <artifactId>jaxb-api</artifactId>
                     </exclusion>
-                    <!-- GWT hosted not working if this is excluded -->
-                    <!--
-            <exclusion>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>wstx-asl</artifactId>
-            </exclusion>
-          -->
                 </exclusions>
             </dependency>
             <dependency>
@@ -1330,47 +1283,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- GWT Dependencies -->
+            <!-- GWT Dependencies. Will deal with these later -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb.api.version}</version>
                 <classifier>sources</classifier>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-incubator</artifactId>
-                <version>${gwt.incubator.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-dev</artifactId>
-                <version>${gwt.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-user</artifactId>
-                <version>${gwt.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-servlet</artifactId>
-                <version>${gwt.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>junit</artifactId>
-                        <groupId>com.google.gwt</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-visualization</artifactId>
-                <version>1.0</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>

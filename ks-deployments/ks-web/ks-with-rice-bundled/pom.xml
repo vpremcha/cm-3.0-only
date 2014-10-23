@@ -10,30 +10,8 @@
         <artifactId>ks-web</artifactId>
         <version>2.1.1-FR2-M1-SNAPSHOT</version>
     </parent>
-    <properties>
-        <ks.gwt.module.org>org.kuali.student.core.organization.ui.OrgEntry</ks.gwt.module.org>
-        <ks.gwt.module.lum>org.kuali.student.lum.lu.ui.main.LUMMain</ks.gwt.module.lum>
-    </properties>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <phase>${ks.gwt.compile.phase}</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <modules>
-                        <!--<module>${ks.gwt.module.org}</module> -->
-                        <module>${ks.gwt.module.lum}</module>
-                    </modules>
-                </configuration>
-            </plugin>
             <!-- added by bonnie -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -242,7 +220,7 @@
             <artifactId>ks-cm-deployment-resources</artifactId>
             <version>${ks.lum.version}</version>
         </dependency>
-        <!-- Sources for GWT Compile -->
+        <!-- Sources for GWT Compile
         <dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-core-ui</artifactId>
@@ -285,6 +263,7 @@
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
+               -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>

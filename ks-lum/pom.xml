@@ -23,8 +23,6 @@
                 <module>ks-lum-impl</module>
                 <module>ks-lum-rice</module>
                 <module>ks-lum-ui</module>
-                <module>ks-lum-program</module>
-                <module>ks-lum-ui-common</module>
                 <module>ks-cm-krad</module>
                 <module>ks-cm-deployment-resources</module>
             </modules>
@@ -42,8 +40,6 @@
                 <module>ks-lum-impl</module>
                 <module>ks-lum-rice</module>
                 <module>ks-lum-ui</module>
-                <module>ks-lum-program</module>
-                <module>ks-lum-ui-common</module>
                 <module>ks-cm-krad</module>
             </modules>
         </profile>
@@ -53,8 +49,6 @@
                 <module>ks-lum-impl</module>
                 <module>ks-lum-rice</module>
                 <module>ks-lum-ui</module>
-                <module>ks-lum-program</module>
-                <module>ks-lum-ui-common</module>
             </modules>
         </profile>
         <profile>
@@ -87,8 +81,6 @@
                 <module>ks-lum-impl</module>
                 <module>ks-lum-rice</module>
                 <module>ks-lum-ui</module>
-                <module>ks-lum-program</module>
-                <module>ks-lum-ui-common</module>
                 <module>ks-cm-krad</module>
             </modules>
         </profile>

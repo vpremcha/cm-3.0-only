@@ -253,7 +253,7 @@ public class CourseAssembler implements BOAssembler<CourseInfo, CluInfo> {
                 // the course
                 List<CluInfo> formats = cluService.getRelatedClusByCluAndRelationType(course
                         .getId(),
-                        CourseAssemblerConstants.COURSE_FORMAT_RELATION_TYPE , new ContextInfo());
+                        CourseAssemblerConstants.COURSE_FORMAT_RELATION_TYPE, contextInfo);
 
                 for (CluInfo format : formats) {
                     FormatInfo formatInfo = formatAssembler.assemble(format,

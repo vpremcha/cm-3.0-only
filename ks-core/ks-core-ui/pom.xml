@@ -112,7 +112,12 @@
         </profile>
     </profiles>
     <dependencies>
-        <!-- KS common & core dependencies (GWT dependencies come from common-ui) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- KS common & core dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ks-core-krms</artifactId>

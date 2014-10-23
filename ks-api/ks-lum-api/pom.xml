@@ -15,11 +15,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.code.gwtx</groupId>
-            <artifactId>gwtx</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
