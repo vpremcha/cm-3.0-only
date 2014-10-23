@@ -163,12 +163,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>ks-ap</module>
-                <module>ks-fa</module>
                 <module>ks-deployments</module>
                 <module>ks-core</module>
                 <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
         </profile>
@@ -184,20 +181,14 @@
                 <module>ks-deployments</module>
                 <module>ks-core</module>
                 <module>ks-lum</module>
-                <module>ks-enroll</module>
-                <module>ks-ap</module>
-                <module>ks-fa</module>
             </modules>
         </profile>
         <profile>
             <id>test-only</id>
             <modules>
-                <module>ks-ap</module>
-                <module>ks-fa</module>
                 <module>ks-api</module>
                 <module>ks-core</module>
                 <module>ks-lum</module>
-                <module>ks-enroll</module>
             </modules>
         </profile>
         <profile>
@@ -230,11 +221,8 @@
                 <oracle.dba.url>jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE</oracle.dba.url>
             </properties>
             <modules>
-                <module>ks-ap</module>
-                <module>ks-fa</module>
                 <module>ks-core</module>
                 <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
                 <module>ks-deployments/ks-dbs/ks-db-validation</module>
             </modules>
@@ -415,21 +403,6 @@
                                 <module>ks-lum</module>
 				<branchName>enrollment_ks-lum_trunk</branchName>
                                 <versionProperty>ks.lum.version</versionProperty>
-                            </mapping>
-			    <mapping>
-                                <module>ks-enroll</module>
-				<branchName>enrollment_ks-enroll_trunk</branchName>
-                                <versionProperty>ks.enroll.version</versionProperty>
-                            </mapping>
-			    <mapping>
-                                <module>ks-fa</module>
-				<branchName>enrollment_ks-fa_trunk</branchName>
-                                <versionProperty>ks.fa.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-ap</module>
-				<branchName>enrollment_ks-ap_trunk</branchName>
-                                <versionProperty>ks.ap.version</versionProperty>
                             </mapping>
                             <mapping>
                                 <module>ks-deployments</module>

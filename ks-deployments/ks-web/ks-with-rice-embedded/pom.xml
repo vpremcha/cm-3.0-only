@@ -168,11 +168,6 @@
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.enroll</groupId>
-            <artifactId>ks-enroll-ui</artifactId>
-            <version>${ks.enroll.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-common-ksink</artifactId>
             <version>${ks.core.version}</version>
@@ -188,26 +183,6 @@
             <groupId>org.kuali.student.lum</groupId>
             <artifactId>ks-cm-deployment-resources</artifactId>
             <version>${ks.lum.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.ap</groupId>
-            <artifactId>ks-ap-deployment-resources</artifactId>
-            <version>${ks.ap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.fa</groupId>
-            <artifactId>ks-fa-deployment-resources</artifactId>
-            <version>${ks.fa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.enroll</groupId>
-            <artifactId>ks-enroll-deployment-resources</artifactId>
-            <version>${ks.enroll.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.enroll</groupId>
-            <artifactId>ks-enroll-rice</artifactId>
-            <version>${ks.enroll.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.core</groupId>
@@ -348,48 +323,5 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.kuali.student.api</groupId>
-            <artifactId>ks-enroll-api</artifactId>
-            <version>${ks.api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.ap</groupId>
-            <artifactId>ks-ap-framework</artifactId>
-            <version>${ks.ap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.ap</groupId>
-            <artifactId>ks-ap-impl</artifactId>
-            <version>${ks.ap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.ap</groupId>
-            <artifactId>ks-ap-ui</artifactId>
-            <version>${ks.ap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.ap</groupId>
-            <artifactId>ks-ap-web</artifactId>
-            <version>${ks.ap.version}</version>
-            <type>war</type>
-        </dependency>
-        <!-- start ks-fa dependencies -->
-        <dependency>
-            <groupId>org.kuali.student.fa</groupId>
-            <artifactId>ks-fa-api</artifactId>
-            <version>${ks.fa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.fa</groupId>
-            <artifactId>ks-fa-impl</artifactId>
-            <version>${ks.fa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.fa</groupId>
-            <artifactId>ks-fa-ui</artifactId>
-            <version>${ks.fa.version}</version>
-        </dependency>
-        <!-- end ks-fa dependencies -->
     </dependencies>
 </project>
