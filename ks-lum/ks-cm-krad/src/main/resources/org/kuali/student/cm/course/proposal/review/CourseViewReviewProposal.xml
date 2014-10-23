@@ -472,7 +472,7 @@
           p:ajaxSubmit="false"
           p:methodToCall="editProposalPage"
           p:actionLabel="Edit"
-          p:render="@{(#actionFlags[#Constants.KUALI_ACTION_CAN_EDIT]) and (!#uiHelper.pendingWorkflowAction)}"/>
+          p:render="@{(#actionFlags[#Constants.KUALI_ACTION_CAN_EDIT]) and (!#form.pendingWorkflowAction)}"/>
 
     <!-- FOOTER BEANS IN THIS SECTION BELOW -->
 
@@ -482,7 +482,7 @@
                 <bean parent="Uif-HorizontalBoxGroup">
                     <property name="items">
                         <list>
-                            <!-- !#uiHelper.pendingWorkflowAction (render condition) should be added to all the workflow action buttons to avoid any workflow action being taken back to back-->
+                            <!-- !#form.pendingWorkflowAction (render condition) should be added to all the workflow action buttons to avoid any workflow action being taken back to back-->
                             <bean parent="CM-Proposal-Button-Submit"/>
                             <bean parent="CM-Proposal-Button-BlanketApprove"/>
                             <bean parent="CM-Proposal-Button-ApproveOrReSubmit" />
@@ -510,7 +510,7 @@
         <property name="methodToCall" value="route"/>
         <property name="performClientSideValidation" value="true"/>
         <property name="disabled" value="@{#dataObject.missingRequiredFields}"/>
-        <property name="render" value="@{(#uiHelper.useReviewProcess) and (#actionFlags[#Constants.KUALI_ACTION_CAN_ROUTE]) and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{(#uiHelper.useReviewProcess) and (#actionFlags[#Constants.KUALI_ACTION_CAN_ROUTE]) and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-BlanketApprove" parent="CM-Proposal-Button-BlanketApprove-parentBean" />
@@ -522,7 +522,7 @@
         <property name="performClientSideValidation" value="true"/>
         <property name="disabled" value="@{#dataObject.missingRequiredFields}"/>
         <!-- we do not allow blanket approve on proposals that are not using curriculum review approvals -->
-        <property name="render" value="@{(#uiHelper.useReviewProcess) and (#actionFlags[#Constants.KUALI_ACTION_CAN_BLANKET_APPROVE]) and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{(#uiHelper.useReviewProcess) and (#actionFlags[#Constants.KUALI_ACTION_CAN_BLANKET_APPROVE]) and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-Fyi" parent="CM-Proposal-Button-Fyi-parentBean" />
@@ -532,7 +532,7 @@
         <property name="actionLabel" value="FYI"/>
         <property name="methodToCall" value="fyi"/>
         <property name="performClientSideValidation" value="true"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_FYI] and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_FYI] and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-Acknowledge" parent="CM-Proposal-Button-Acknowledge-parentBean" />
@@ -542,7 +542,7 @@
         <property name="actionLabel" value="Acknowledge"/>
         <property name="methodToCall" value="acknowledge"/>
         <property name="performClientSideValidation" value="true"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_ACKNOWLEDGE] and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_ACKNOWLEDGE] and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-ApproveOrReSubmit" parent="CM-Proposal-Button-ApproveOrReSubmit-parentBean" />
@@ -553,7 +553,7 @@
         <property name="methodToCall" value="approve"/>
         <property name="performClientSideValidation" value="true"/>
         <property name="disabled" value="@{#dataObject.missingRequiredFields}"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_APPROVE] and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_APPROVE] and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-Reject" parent="CM-Proposal-Button-Reject-parentBean" />
@@ -563,7 +563,7 @@
         <property name="actionLabel" value="Reject"/>
         <property name="methodToCall" value="disapprove"/>
         <property name="performClientSideValidation" value="true"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_DISAPPROVE] and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_DISAPPROVE] and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <bean id="CM-Proposal-Button-ReturnToPrevious" parent="CM-Proposal-Button-ReturnToPrevious-parentBean" />
@@ -573,7 +573,7 @@
         <property name="methodToCall" value="returnToPreviousNode"/>
         <property name="performClientSideValidation" value="true"/>
         <property name="performDirtyValidation" value="false"/>
-        <property name="render" value="@{(!#emptyList(#workflowDoc.previousNodeNames)) and (#actionFlags[#Constants.KUALI_ACTION_CAN_APPROVE]) and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{(!#emptyList(#workflowDoc.previousNodeNames)) and (#actionFlags[#Constants.KUALI_ACTION_CAN_APPROVE]) and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <!-- parent bean structure for Cancel button which should behave the same for both CS and regular users -->
@@ -592,7 +592,7 @@
         <property name="actionLabel" value="Withdraw"/>
         <property name="methodToCall" value="withdraw"/>
         <property name="performClientSideValidation" value="false"/>
-        <property name="render" value="@{#actionFlags[T(org.kuali.student.cm.common.util.CurriculumManagementConstants$ActionFlags).KUALI_ACTION_CAN_WITHDRAW] and (!#uiHelper.pendingWorkflowAction)}"/>
+        <property name="render" value="@{#actionFlags[T(org.kuali.student.cm.common.util.CurriculumManagementConstants$ActionFlags).KUALI_ACTION_CAN_WITHDRAW] and (!#form.pendingWorkflowAction)}"/>
     </bean>
 
     <!-- BUTTON BEANS IN THIS SECTION ABOVE -->

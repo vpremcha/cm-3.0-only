@@ -194,7 +194,7 @@
                 <bean parent="Uif-HorizontalBoxGroup">
                     <property name="items">
                         <list>
-                            <!-- !#uiHelper.pendingWorkflowAction (render condition) should be added to all the workflow action buttons to avoid any workflow action being taken back to back-->
+                            <!-- !#form.pendingWorkflowAction (render condition) should be added to all the workflow action buttons to avoid any workflow action being taken back to back-->
                             <bean parent="CM-Proposal-Button-Submit"/>
                             <bean parent="CM-Proposal-Button-BlanketApprove"/>
                             <bean parent="CM-Proposal-Button-ApproveOrReSubmit" />
