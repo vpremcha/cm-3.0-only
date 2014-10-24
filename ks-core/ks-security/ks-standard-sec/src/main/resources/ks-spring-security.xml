@@ -27,10 +27,7 @@
 
     <security:http auto-config="false">
         <security:form-login login-page="/login.jsp" />
-        <security:custom-filter ref="ksLogoutFilter"
-                                position="LOGOUT_FILTER" />
-        <security:custom-filter ref="authenticationGwtRpcFilter"
-                                after="CAS_FILTER" />
+        <security:custom-filter ref="ksLogoutFilter" position="LOGOUT_FILTER" />
         <security:intercept-url pattern="/admin/**" access="ROLE_KS_ADMIN"/>
         <!-- used for backdoor login 		-->
         <security:intercept-url pattern="/j_spring_security_switch_user*" access="ROLE_KS_BACKDOOR"/>

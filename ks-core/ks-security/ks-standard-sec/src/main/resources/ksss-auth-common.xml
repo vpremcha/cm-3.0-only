@@ -49,14 +49,11 @@
         <property name="serviceQName" value="{http://rice.kuali.org/kim/v2_0}roleService"/>
     </bean>
 
-
 	<bean id="ksRiceUserDetailsService" class="org.kuali.student.security.spring.KSRiceDefaultUserDetailsService">
 		<property name="identityService" ref="identityServiceClient"/>
 		<property name="roleService" ref="roleServiceClient"/>
   	</bean>
-	
-	<bean id="authenticationGwtRpcFilter" class="org.kuali.student.security.filter.AuthenticationGwtRpcFilter"/>
-	
+
 	<bean id="interceptorContainer" class="org.kuali.student.security.cxf.interceptors.IntercpetorContainer">
 		<property name="inInterceptors">
 			<list>
