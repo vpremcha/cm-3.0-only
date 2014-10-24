@@ -61,12 +61,13 @@
 	
 	<!-- Needed for KRAD to access images -->
 	<param name="cm.krad.externalizable.images.url">../ks-cm-krad/images</param>
-    
+
+    <param name="ks.externalizable.images.url">../themes/ksboot/images</param>
+
     <param name="rice.struts.message.resources" override="true">${rice.struts.message.resources},org.kuali.student.cm.KSCM-ApplicationResources</param>
 
     <param name="resourceBundleNames" override="true">${resourceBundleNames},org.kuali.student.cm.KSCM-ApplicationResources</param>
 
     <param name="clu.cache.search.invalidateSearchCacheOnly">true</param>
     <param name="clu.cache.search.verifyResultsBeforeInvalidate">true</param>
-    
 </config>
