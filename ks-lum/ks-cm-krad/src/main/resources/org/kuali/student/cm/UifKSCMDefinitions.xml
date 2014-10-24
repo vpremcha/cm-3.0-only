@@ -235,7 +235,13 @@
                 <!-- Config for admin create course proposals -->
                 <entry key="#{T(org.kuali.student.cm.common.util.CurriculumManagementConstants$DocumentTypeNames$CourseProposal).COURSE_CREATE_ADMIN}">
                      <map>
-                        <!-- Admin proposals are in state 'S'aved until they are approved. -->
+                         <!-- Admin proposals are in state 'S'aved until they are approved. -->
+                        <entry key="I">
+                            <map>
+                                <entry key="text" value="Required for Approval"/>
+                                <entry key="propertyNames" value-ref="propertiesRequiredForApprove"/>
+                            </map>
+                        </entry>
                         <entry key="S">
                             <map>
                                 <entry key="text" value="Required for Approval"/>
