@@ -20,7 +20,6 @@ package org.kuali.student.cm.common.util;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.krad.util.KRADPropertyConstants;
 import org.kuali.student.r2.common.util.date.KSDateTimeFormatter;
-import org.kuali.student.r2.core.constants.ProposalServiceConstants;
 import org.kuali.student.r2.lum.clu.CLUConstants;
 
 /**
@@ -329,6 +328,12 @@ public class CurriculumManagementConstants {
 
     //  Learning Objective Repository keys
     public final static String KUALI_LO_REPOSITORY_KEY_SINGLE_USE = "kuali.loRepository.key.singleUse";
+
+
+    //  These were duplicated from CourseAssemblerConstants to removed the dependency on ks-lum-impl from ks-cm-krad
+	public static final String COURSE_RESULT_COMP_ATTR_PASSFAIL = "passFail";
+	public static final String COURSE_RESULT_COMP_ATTR_AUDIT = "audit";
+	public static final String COURSE_CROSSLISTING_IDENT_TYPE = "kuali.lu.type.CreditCourse.identifier.crosslisting";
 
     public final static String STATE_KEY_ACTIVE = "Active";
 

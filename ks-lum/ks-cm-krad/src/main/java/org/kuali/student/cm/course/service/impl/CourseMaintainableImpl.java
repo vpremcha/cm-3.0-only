@@ -71,7 +71,8 @@ import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.DtoConstants;
-import org.kuali.student.r2.common.exceptions.*;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.util.AttributeHelper;
 import org.kuali.student.r2.common.util.constants.LearningObjectiveServiceConstants;
 import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
@@ -100,7 +101,6 @@ import org.kuali.student.r2.lum.course.dto.CourseJointInfo;
 import org.kuali.student.r2.lum.course.dto.CourseVariationInfo;
 import org.kuali.student.r2.lum.course.dto.FormatInfo;
 import org.kuali.student.r2.lum.course.dto.LoDisplayInfo;
-import org.kuali.student.r2.lum.course.service.assembler.CourseAssemblerConstants;
 import org.kuali.student.r2.lum.lo.dto.LoCategoryInfo;
 import org.kuali.student.r2.lum.lo.service.LearningObjectiveService;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
@@ -894,7 +894,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         }
 
         for (int count = 0; count < (courseInfoWrapper.getCourseInfo().getCrossListings().size()); count++) {
-            courseInfoWrapper.getCourseInfo().getCrossListings().get(count).setTypeKey(CourseAssemblerConstants.COURSE_CROSSLISTING_IDENT_TYPE);
+            courseInfoWrapper.getCourseInfo().getCrossListings().get(count).setTypeKey(CurriculumManagementConstants.COURSE_CROSSLISTING_IDENT_TYPE);
         }
 
         /*
@@ -1192,7 +1192,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         AttributeInfo passFailAttr = null;
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
                 passFailAttr = attr;
                 break;
             }
@@ -1200,7 +1200,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         if (passFailAttr == null) {
             passFailAttr = new AttributeInfo();
-            passFailAttr.setKey(CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL);
+            passFailAttr.setKey(CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL);
             courseInfoWrapper.getCourseInfo().getAttributes().add(passFailAttr);
         }
 
@@ -1212,7 +1212,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         CourseInfoWrapper courseInfoWrapper = (CourseInfoWrapper) getDataObject();
 
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
                 courseInfoWrapper.setPassFail(BooleanUtils.toBoolean(attr.getValue()));
                 break;
             }
@@ -1226,7 +1226,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         AttributeInfo auditAttr = null;
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
                 auditAttr = attr;
                 break;
             }
@@ -1234,7 +1234,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         if (auditAttr == null) {
             auditAttr = new AttributeInfo();
-            auditAttr.setKey(CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT);
+            auditAttr.setKey(CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT);
             courseInfoWrapper.getCourseInfo().getAttributes().add(auditAttr);
         }
 
@@ -1246,7 +1246,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         CourseInfoWrapper courseInfoWrapper = (CourseInfoWrapper) getDataObject();
 
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
                 courseInfoWrapper.setAudit(BooleanUtils.toBoolean(attr.getValue()));
                 break;
             }
