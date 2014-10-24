@@ -1407,32 +1407,6 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
             throw new RuntimeException("Caught Exception while populating Course data", e);
         }
 
-        finalizeUiHelper();
-
-        //  If this is the draft course on a modify with new version then save the start term for the current version of the course.
-        //  This is used to constrain the list of start terms on the UI.
-        if (dataObject.getUiHelper().isModifyWithNewVersionProposal()
-                && dataObject.getCourseInfo().getStateKey().equals(DtoConstants.STATE_DRAFT)) {
-            String versionIndependentId = dataObject.getCourseInfo().getVersion().getVersionIndId();
-            ContextInfo contextInfo = ContextUtils.createDefaultContextInfo();
-            CourseInfo currentVersion = null;
-            String startTermConstrainingTermId = null;
-            try {
-                currentVersion = CourseProposalUtil.getCurrentVersionOfCourse(versionIndependentId, contextInfo);
-                // kscm-2838 Check if current version has endTerm
-                if (currentVersion.getEndTerm() != null) {
-                    // set the constraining term to current version's endTerm
-                    startTermConstrainingTermId = currentVersion.getEndTerm();
-                }
-                else {
-                    // kscm-2838  Current version has no endTerm, so set the constraining term  to current version's startTerm
-                    startTermConstrainingTermId = currentVersion.getStartTerm();
-                }
-                dataObject.setStartTermConstrainingTermId(startTermConstrainingTermId);
-            } catch (Exception e) {
-                LOG.error("Could not get current course for version.", e);
-            }
-        }
     }
     /**
      * Loads the data object for the maintenance view.
@@ -1450,22 +1424,6 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
             throw new RuntimeException(e);
         }
 
-    }
-
-    /**
-     * Performs the final initialization of the UI Helper class.
-     */
-    protected void finalizeUiHelper() {
-        CourseInfoWrapper dataObject = (CourseInfoWrapper) getDataObject();
-
-        String docId = dataObject.getProposalInfo().getWorkflowId();
-        String docTypeName = findDocumentTypeName(docId);
-
-        //  Set the flag for a modify a course with a new version.
-        //  Kinda feels we should just be setting the doc type and put the logic in the UI Helper.
-        if (ArrayUtils.contains(CurriculumManagementConstants.DocumentTypeNames.COURSE_MODIFY_DOC_TYPE_NAMES, docTypeName)) {
-            dataObject.getUiHelper().setModifyWithNewVersionProposal(true);
-        }
     }
 
     /**
