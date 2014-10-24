@@ -34,76 +34,86 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		that are encoded here.
 	************************************************************* -->
 	<!-- The following file gets generated during the build and gets put into the target/classes directory -->
-	<import resource="classpath:ks-AppointmentInfo-dictionary-generated.xml"/>
+	<import resource="classpath:ks-TypeInfo-dictionary-generated.xml"/>
 
-	<!-- AppointmentInfo-->
-	<bean id="AppointmentInfo" parent="AppointmentInfo-parent"/>
-	<bean id="AppointmentInfo-parent" abstract="true" parent="AppointmentInfo-generated">
+	<!-- TypeInfo-->
+	<bean id="TypeInfo" parent="TypeInfo-parent"/>
+	<bean id="TypeInfo-parent" abstract="true" parent="TypeInfo-generated">
 	<!-- insert any overrides to the generated object definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.id" parent="AppointmentInfo.id-parent"/>
-	<bean id="AppointmentInfo.id-parent" abstract="true" parent="AppointmentInfo.id-generated">
+	<bean id="TypeInfo.key" parent="TypeInfo.key-parent"/>
+	<bean id="TypeInfo.key-parent" abstract="true" parent="TypeInfo.key-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.typeKey" parent="AppointmentInfo.typeKey-parent"/>
-	<bean id="AppointmentInfo.typeKey-parent" abstract="true" parent="AppointmentInfo.typeKey-generated">
+	<bean id="TypeInfo.name" parent="TypeInfo.name-parent"/>
+	<bean id="TypeInfo.name-parent" abstract="true" parent="TypeInfo.name-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.stateKey" parent="AppointmentInfo.stateKey-parent"/>
-	<bean id="AppointmentInfo.stateKey-parent" abstract="true" parent="AppointmentInfo.stateKey-generated">
+	<bean id="TypeInfo.descr" parent="TypeInfo.descr-parent"/>
+	<bean id="TypeInfo.descr-parent" abstract="true" parent="TypeInfo.descr-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.personId" parent="AppointmentInfo.personId-parent"/>
-	<bean id="AppointmentInfo.personId-parent" abstract="true" parent="AppointmentInfo.personId-generated">
+	<bean id="TypeInfo.descr.plain" parent="TypeInfo.descr.plain-parent"/>
+	<bean id="TypeInfo.descr.plain-parent" abstract="true" parent="TypeInfo.descr.plain-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.slotId" parent="AppointmentInfo.slotId-parent"/>
-	<bean id="AppointmentInfo.slotId-parent" abstract="true" parent="AppointmentInfo.slotId-generated">
+	<bean id="TypeInfo.descr.formatted" parent="TypeInfo.descr.formatted-parent"/>
+	<bean id="TypeInfo.descr.formatted-parent" abstract="true" parent="TypeInfo.descr.formatted-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.effectiveDate" parent="AppointmentInfo.effectiveDate-parent"/>
-	<bean id="AppointmentInfo.effectiveDate-parent" abstract="true" parent="AppointmentInfo.effectiveDate-generated">
+	<bean id="TypeInfo.effectiveDate" parent="TypeInfo.effectiveDate-parent"/>
+	<bean id="TypeInfo.effectiveDate-parent" abstract="true" parent="TypeInfo.effectiveDate-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.expirationDate" parent="AppointmentInfo.expirationDate-parent"/>
-	<bean id="AppointmentInfo.expirationDate-parent" abstract="true" parent="AppointmentInfo.expirationDate-generated">
+	<bean id="TypeInfo.expirationDate" parent="TypeInfo.expirationDate-parent"/>
+	<bean id="TypeInfo.expirationDate-parent" abstract="true" parent="TypeInfo.expirationDate-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta" parent="AppointmentInfo.meta-parent"/>
-	<bean id="AppointmentInfo.meta-parent" abstract="true" parent="AppointmentInfo.meta-generated">
+	<bean id="TypeInfo.refObjectUri" parent="TypeInfo.refObjectUri-parent"/>
+	<bean id="TypeInfo.refObjectUri-parent" abstract="true" parent="TypeInfo.refObjectUri-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta.versionInd" parent="AppointmentInfo.meta.versionInd-parent"/>
-	<bean id="AppointmentInfo.meta.versionInd-parent" abstract="true" parent="AppointmentInfo.meta.versionInd-generated">
+	<bean id="TypeInfo.serviceUri" parent="TypeInfo.serviceUri-parent"/>
+	<bean id="TypeInfo.serviceUri-parent" abstract="true" parent="TypeInfo.serviceUri-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta.createTime" parent="AppointmentInfo.meta.createTime-parent"/>
-	<bean id="AppointmentInfo.meta.createTime-parent" abstract="true" parent="AppointmentInfo.meta.createTime-generated">
+	<bean id="TypeInfo.meta" parent="TypeInfo.meta-parent"/>
+	<bean id="TypeInfo.meta-parent" abstract="true" parent="TypeInfo.meta-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta.createId" parent="AppointmentInfo.meta.createId-parent"/>
-	<bean id="AppointmentInfo.meta.createId-parent" abstract="true" parent="AppointmentInfo.meta.createId-generated">
+	<bean id="TypeInfo.meta.versionInd" parent="TypeInfo.meta.versionInd-parent"/>
+	<bean id="TypeInfo.meta.versionInd-parent" abstract="true" parent="TypeInfo.meta.versionInd-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta.updateTime" parent="AppointmentInfo.meta.updateTime-parent"/>
-	<bean id="AppointmentInfo.meta.updateTime-parent" abstract="true" parent="AppointmentInfo.meta.updateTime-generated">
+	<bean id="TypeInfo.meta.createTime" parent="TypeInfo.meta.createTime-parent"/>
+	<bean id="TypeInfo.meta.createTime-parent" abstract="true" parent="TypeInfo.meta.createTime-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="AppointmentInfo.meta.updateId" parent="AppointmentInfo.meta.updateId-parent"/>
-	<bean id="AppointmentInfo.meta.updateId-parent" abstract="true" parent="AppointmentInfo.meta.updateId-generated">
+	<bean id="TypeInfo.meta.createId" parent="TypeInfo.meta.createId-parent"/>
+	<bean id="TypeInfo.meta.createId-parent" abstract="true" parent="TypeInfo.meta.createId-generated">
+	<!-- insert any overrides to the generated attribute definitions here -->
+	</bean>
+
+	<bean id="TypeInfo.meta.updateTime" parent="TypeInfo.meta.updateTime-parent"/>
+	<bean id="TypeInfo.meta.updateTime-parent" abstract="true" parent="TypeInfo.meta.updateTime-generated">
+	<!-- insert any overrides to the generated attribute definitions here -->
+	</bean>
+
+	<bean id="TypeInfo.meta.updateId" parent="TypeInfo.meta.updateId-parent"/>
+	<bean id="TypeInfo.meta.updateId-parent" abstract="true" parent="TypeInfo.meta.updateId-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 </beans>
