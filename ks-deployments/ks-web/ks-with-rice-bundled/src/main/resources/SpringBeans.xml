@@ -68,12 +68,8 @@
     <!-- for diagnostic purposes to see which profiles are active -->
     <bean class="org.kuali.student.common.spring.DisplayActiveProfiles"/>
 
-
     <beans profile="ks-core">
-
         <import resource="classpath:ksb/ks-core-no-tx-context.xml"/>
-        <import resource="classpath:mq/ks-mq-context.xml"/>
-
         <import resource="classpath:ks-core-krad-data-dictionary-config.xml"/>
     </beans>
 
@@ -87,7 +83,6 @@
             <property name="allowCustomIsolationLevels" value="true"/>
         </bean>
     </beans>
-
 
     <beans profile="ks-web">
 
@@ -139,9 +134,5 @@
                 </map>
             </property>
         </bean>
-
     </beans>
-
-
-
 </beans>
