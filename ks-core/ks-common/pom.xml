@@ -18,7 +18,6 @@
             <modules>
                 <module>ks-cxf</module>
                 <module>ks-metro</module>
-                <module>ks-eclipselink</module>
                 <module>ks-hibernate</module>
                 <module>ks-jta</module>
                 <module>ks-rice-lessdep</module>
@@ -26,7 +25,6 @@
                 <module>ks-common-test</module>
                 <module>ks-common-impl</module>
                 <module>ks-common-ui</module>
-                <module>ks-common-ksink</module>
                 <module>ks-common-web</module>
             </modules>
         </profile>
@@ -35,7 +33,6 @@
             <modules>
                 <module>ks-cxf</module>
                 <module>ks-metro</module>
-                <module>ks-eclipselink</module>
                 <module>ks-hibernate</module>
                 <module>ks-jta</module>
                 <module>ks-rice-lessdep</module>
@@ -43,7 +40,6 @@
                 <module>ks-common-test</module>
                 <module>ks-common-impl</module>
                 <module>ks-common-ui</module>
-                <module>ks-common-ksink</module>
             </modules>
         </profile>
         <profile>
@@ -51,7 +47,6 @@
             <modules>
                 <module>ks-cxf</module>
                 <module>ks-metro</module>
-                <module>ks-eclipselink</module>
                 <module>ks-hibernate</module>
                 <module>ks-jta</module>
                 <module>ks-rice-lessdep</module>
@@ -77,11 +72,10 @@
                     </plugin>
                 </plugins>
             </build>
-            <!-- include all the modules from the default profile (except ksink, web modules) -->
+            <!-- include all the modules from the default profile (except web modules) -->
             <modules>
                 <module>ks-cxf</module>
                 <module>ks-metro</module>
-                <module>ks-eclipselink</module>
                 <module>ks-hibernate</module>
                 <module>ks-jta</module>
                 <module>ks-rice-lessdep</module>

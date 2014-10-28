@@ -55,54 +55,7 @@
                 <!-- KIM Attributes -->
                 <value>classpath:org/kuali/rice/student/bo/KualiStudentKimAttributes.xml</value>
 				<!-- Should be externalized into a kitchen sink specific profile -->
-				
-	            <!-- Kitchen Sink-->
-                <value>classpath:org/kuali/student/common/kitchensink/KitchenSinkView.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Buttons.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Checkboxes.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionActionImages.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionActionLinksOnHover.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionAddBlankLine.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionAsForm.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionColumnSorting.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionHorizontal.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionInForm.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionOptions.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionPaginationOptions.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionRowSelection.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionRowSelectionHighlight.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionStacked.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/ContainerExpandable.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/DateField.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Growls.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Tree.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Lightbox.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CssGridLayoutManager.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LinkFields.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupCombobox.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupSuggest.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupDefaultAction.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupInputConfirmation.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupOverview.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/LookupQuickView.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/MessageBox.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/MultiSelectControl.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Popovers.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/RadioButtons.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/SelectControl.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/SpinnerControl.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/TextAreaField.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/TextField.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/ComboBoxes.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionNestedTable.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionConfigViewer.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionTL.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/CollectionSL.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/Toolbar.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/UnifiedPageHeader.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/UnifiedPageHeader_M7.xml</value>
-                <value>classpath:org/kuali/student/common/kitchensink/ContextBar.xml</value>
-	    	</list>
+		</list>		
 	    	</constructor-arg>
 		</bean>           
 	</beans>     

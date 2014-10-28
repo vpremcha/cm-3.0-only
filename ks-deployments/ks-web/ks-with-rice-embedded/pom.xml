@@ -143,11 +143,6 @@
         </dependency>
         <dependency>
             <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-common-ksink</artifactId>
-            <version>${ks.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-common-web</artifactId>
             <version>${ks.core.version}</version>
             <type>war</type>
