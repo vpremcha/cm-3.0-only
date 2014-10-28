@@ -84,19 +84,5 @@
                 <module>ks-deployment-resources</module>
             </modules>
         </profile>
-        <profile>
-            <id>skip-surefire-tests-enroll</id>
-            <activation>
-                <property>
-                    <name>skip.enroll.tests</name>
-                </property>
-            </activation>
-            <properties>
-                <skipTests/>
-            </properties>
-            <modules>
-                <module>ks-deployment-resources</module>
-            </modules>
-        </profile>
     </profiles>
 </project>

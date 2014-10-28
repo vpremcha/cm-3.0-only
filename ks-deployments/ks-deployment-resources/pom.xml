@@ -11,14 +11,6 @@
     <description>Kuali Student Deployment Resources</description>
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.kuali.common</groupId>
             <artifactId>kuali-impex-export</artifactId>
             <version>${kuali-impex.version}</version>

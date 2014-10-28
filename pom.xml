@@ -36,7 +36,6 @@
     <properties>
         <ks.api.version>2.1.1-FR2-M1-SNAPSHOT</ks.api.version>
         <ks.core.version>2.1.1-FR2-M1-SNAPSHOT</ks.core.version>
-        <ks.enroll.version>0.2.0-FR2-M1-SNAPSHOT</ks.enroll.version>
         <ks.lum.version>2.1.1-FR2-M1-SNAPSHOT</ks.lum.version>
         <ks.deployments.version>2.1.1-FR2-M1-SNAPSHOT</ks.deployments.version>
         <ks.ap.version>0.8.0-FR2-M1-SNAPSHOT</ks.ap.version>

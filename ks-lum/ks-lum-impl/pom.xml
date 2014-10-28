@@ -43,10 +43,6 @@
             <version>${ks.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.rice</groupId>
-            <artifactId>rice-impl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-common-test</artifactId>
             <version>${ks.core.version}</version>
@@ -86,15 +82,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.kuali.student.core</groupId>
-                    <artifactId>ks-hibernate</artifactId>
-                    <version>${ks.core.version}</version>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>ks-eclipselink</id>
@@ -113,15 +100,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.kuali.student.core</groupId>
-                    <artifactId>ks-cxf</artifactId>
-                    <version>${ks.core.version}</version>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>ks-metro</id>

@@ -8,14 +8,4 @@
     </parent>
     <artifactId>ks-cm-deployment-resources</artifactId>
     <name>KS Curriculum Management Deployment Resources</name>
-    <dependencies>
-        <dependency>
-            <groupId>org.kuali.rice</groupId>
-            <artifactId>rice-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.rice</groupId>
-            <artifactId>rice-krad-web-framework</artifactId>
-        </dependency>
-    </dependencies>
 </project>

@@ -38,7 +38,7 @@
   <!-- overwriting this section so that some controller methods are not transactional -->
   <aop:config>
         <aop:pointcut id="controllerTransaction"
-            expression="execution(* org.kuali.rice.krad.web.controller.UifControllerBase+.*(..)) and !execution(* org.kuali.student.enrollment.class2.acal.controller.AcademicCalendarController.save(..)) and !execution(* org.kuali.student.enrollment.class2.acal.controller.CalendarSearchController.delete(..)) and !execution(* org.kuali.student.enrollment.class2.acal.controller.AcademicCalendarController.delete(..)) "/>
+            expression="execution(* org.kuali.rice.krad.web.controller.UifControllerBase+.*(..)) "/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="controllerTransaction"/>
   </aop:config>
 
@@ -56,10 +56,6 @@
   <beans profile="ks-core">
   	<context:component-scan base-package="org.kuali.student.common.uif" />
   	<context:component-scan base-package="org.kuali.student.common.kitchensink" />
-  </beans>
-  
-  <beans profile="ks-enroll">
-  	<context:component-scan base-package="org.kuali.student.enrollment" />
   </beans>
   
   <beans profile="ks-ap">

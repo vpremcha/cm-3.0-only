@@ -30,7 +30,6 @@
         <property name="collectionBeanReferences" >
             <list>
                 <value>ks-core-dictionary-file-locations</value>
-                <value>ks-enroll-dictionary-file-locations</value>
                 <value>ks-cm-dictionary-file-locations</value>
                 <value>ks-ap-dictionary-file-locations</value>
             </list>

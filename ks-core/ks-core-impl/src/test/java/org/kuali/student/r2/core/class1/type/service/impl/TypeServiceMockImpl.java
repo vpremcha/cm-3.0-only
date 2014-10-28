@@ -33,7 +33,6 @@ import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 import org.kuali.student.r2.common.exceptions.ReadOnlyException;
 import org.kuali.student.r2.common.exceptions.VersionMismatchException;
 import org.kuali.student.r2.common.util.RichTextHelper;
-import org.kuali.student.r2.common.util.constants.LuiServiceConstants;
 import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
 import org.kuali.student.r2.core.class1.type.dto.TypeTypeRelationInfo;
 import org.kuali.student.r2.core.class1.type.service.TypeService;
@@ -43,6 +42,7 @@ import org.kuali.student.r2.core.constants.TypeServiceConstants;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import javax.jws.WebParam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -131,13 +131,8 @@ public class TypeServiceMockImpl implements TypeService, MockService {
     }
 
     @Override
-    public List<TypeInfo> getTypesForGroupType(String groupTypeKey,  ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        List<TypeInfo> result = new ArrayList<TypeInfo>();
-        TypeInfo typeInfo = new TypeInfo();
-        typeInfo.setKey(LuiServiceConstants.LECTURE_ACTIVITY_OFFERING_TYPE_KEY);
-        result.add(typeInfo);
-        return result;
-
+    public List<TypeInfo> getTypesForGroupType(@WebParam(name = "groupTypeKey") String groupTypeKey, @WebParam(name = "contextInfo") ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        throw new OperationFailedException("Method not implemented."); // TODO implement
     }
 
     @Override
