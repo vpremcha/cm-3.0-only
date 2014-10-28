@@ -318,7 +318,7 @@
                       p:jumpToIdAfterSubmit="TOP">
                 </bean>
                 <bean parent="Uif-ActionLink" p:id="CM-Proposal-Course-View-Admin-Cancel"
-                      p:actionLabel="Cancel"
+                      p:actionLabel="@{#actionFlags[#Constants.KUALI_ACTION_CAN_SAVE] ? 'Cancel' : 'Close'}"
                       p:methodToCall="back"
                       p:style="margin-top:5px;"
                       p:render="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CLOSE]}"/>

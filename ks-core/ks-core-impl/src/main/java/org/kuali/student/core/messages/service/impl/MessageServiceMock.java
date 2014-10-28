@@ -270,7 +270,4 @@ public class MessageServiceMock implements MessageService {
 			OperationFailedException, PermissionDeniedException {
 		 throw new UnsupportedOperationException ("not implemented");
 	}
-    
-    
-
 }

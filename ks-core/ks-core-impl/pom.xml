@@ -21,7 +21,6 @@
                     <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
-            <!--  this will allow us to access core tests inside of ks-enroll by specifying the dependency type of test-jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -36,6 +35,10 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>backport-util-concurrent</groupId>
+            <artifactId>backport-util-concurrent</artifactId>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ks-common-util</artifactId>
@@ -69,12 +72,6 @@
             <artifactId>ks-rice-lessdep</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.api</groupId>
-            <artifactId>ks-enroll-api</artifactId>
-            <version>${ks.api.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

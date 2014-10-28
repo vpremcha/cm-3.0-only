@@ -110,6 +110,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
         <!-- uncomment to enable sql logging -->
         <!--dependency>
       <groupId>p6spy</groupId>
@@ -220,50 +225,6 @@
             <artifactId>ks-cm-deployment-resources</artifactId>
             <version>${ks.lum.version}</version>
         </dependency>
-        <!-- Sources for GWT Compile
-        <dependency>
-            <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-core-ui</artifactId>
-            <classifier>sources</classifier>
-            <version>${ks.core.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-common-ui</artifactId>
-            <version>${ks.core.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.api</groupId>
-            <artifactId>ks-common-api</artifactId>
-            <version>${ks.api.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.api</groupId>
-            <artifactId>ks-core-api</artifactId>
-            <version>${ks.api.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-common-util</artifactId>
-            <version>${ks.core.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-common-impl</artifactId>
-            <version>${ks.core.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-               -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>

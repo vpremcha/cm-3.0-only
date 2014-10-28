@@ -71,7 +71,8 @@ import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.DtoConstants;
-import org.kuali.student.r2.common.exceptions.*;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.util.AttributeHelper;
 import org.kuali.student.r2.common.util.constants.LearningObjectiveServiceConstants;
 import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
@@ -100,7 +101,6 @@ import org.kuali.student.r2.lum.course.dto.CourseJointInfo;
 import org.kuali.student.r2.lum.course.dto.CourseVariationInfo;
 import org.kuali.student.r2.lum.course.dto.FormatInfo;
 import org.kuali.student.r2.lum.course.dto.LoDisplayInfo;
-import org.kuali.student.r2.lum.course.service.assembler.CourseAssemblerConstants;
 import org.kuali.student.r2.lum.lo.dto.LoCategoryInfo;
 import org.kuali.student.r2.lum.lo.service.LearningObjectiveService;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
@@ -894,7 +894,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         }
 
         for (int count = 0; count < (courseInfoWrapper.getCourseInfo().getCrossListings().size()); count++) {
-            courseInfoWrapper.getCourseInfo().getCrossListings().get(count).setTypeKey(CourseAssemblerConstants.COURSE_CROSSLISTING_IDENT_TYPE);
+            courseInfoWrapper.getCourseInfo().getCrossListings().get(count).setTypeKey(CurriculumManagementConstants.COURSE_CROSSLISTING_IDENT_TYPE);
         }
 
         /*
@@ -1192,7 +1192,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         AttributeInfo passFailAttr = null;
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
                 passFailAttr = attr;
                 break;
             }
@@ -1200,7 +1200,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         if (passFailAttr == null) {
             passFailAttr = new AttributeInfo();
-            passFailAttr.setKey(CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL);
+            passFailAttr.setKey(CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL);
             courseInfoWrapper.getCourseInfo().getAttributes().add(passFailAttr);
         }
 
@@ -1212,7 +1212,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         CourseInfoWrapper courseInfoWrapper = (CourseInfoWrapper) getDataObject();
 
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_PASSFAIL)) {
                 courseInfoWrapper.setPassFail(BooleanUtils.toBoolean(attr.getValue()));
                 break;
             }
@@ -1226,7 +1226,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         AttributeInfo auditAttr = null;
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
                 auditAttr = attr;
                 break;
             }
@@ -1234,7 +1234,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
 
         if (auditAttr == null) {
             auditAttr = new AttributeInfo();
-            auditAttr.setKey(CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT);
+            auditAttr.setKey(CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT);
             courseInfoWrapper.getCourseInfo().getAttributes().add(auditAttr);
         }
 
@@ -1246,7 +1246,7 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
         CourseInfoWrapper courseInfoWrapper = (CourseInfoWrapper) getDataObject();
 
         for (AttributeInfo attr : courseInfoWrapper.getCourseInfo().getAttributes()) {
-            if (StringUtils.equals(attr.getKey(), CourseAssemblerConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
+            if (StringUtils.equals(attr.getKey(), CurriculumManagementConstants.COURSE_RESULT_COMP_ATTR_AUDIT)) {
                 courseInfoWrapper.setAudit(BooleanUtils.toBoolean(attr.getValue()));
                 break;
             }
@@ -1407,32 +1407,6 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
             throw new RuntimeException("Caught Exception while populating Course data", e);
         }
 
-        finalizeUiHelper();
-
-        //  If this is the draft course on a modify with new version then save the start term for the current version of the course.
-        //  This is used to constrain the list of start terms on the UI.
-        if (dataObject.getUiHelper().isModifyWithNewVersionProposal()
-                && dataObject.getCourseInfo().getStateKey().equals(DtoConstants.STATE_DRAFT)) {
-            String versionIndependentId = dataObject.getCourseInfo().getVersion().getVersionIndId();
-            ContextInfo contextInfo = ContextUtils.createDefaultContextInfo();
-            CourseInfo currentVersion = null;
-            String startTermConstrainingTermId = null;
-            try {
-                currentVersion = CourseProposalUtil.getCurrentVersionOfCourse(versionIndependentId, contextInfo);
-                // kscm-2838 Check if current version has endTerm
-                if (currentVersion.getEndTerm() != null) {
-                    // set the constraining term to current version's endTerm
-                    startTermConstrainingTermId = currentVersion.getEndTerm();
-                }
-                else {
-                    // kscm-2838  Current version has no endTerm, so set the constraining term  to current version's startTerm
-                    startTermConstrainingTermId = currentVersion.getStartTerm();
-                }
-                dataObject.setStartTermConstrainingTermId(startTermConstrainingTermId);
-            } catch (Exception e) {
-                LOG.error("Could not get current course for version.", e);
-            }
-        }
     }
     /**
      * Loads the data object for the maintenance view.
@@ -1450,22 +1424,6 @@ public class CourseMaintainableImpl extends CommonCourseMaintainableImpl impleme
             throw new RuntimeException(e);
         }
 
-    }
-
-    /**
-     * Performs the final initialization of the UI Helper class.
-     */
-    protected void finalizeUiHelper() {
-        CourseInfoWrapper dataObject = (CourseInfoWrapper) getDataObject();
-
-        String docId = dataObject.getProposalInfo().getWorkflowId();
-        String docTypeName = findDocumentTypeName(docId);
-
-        //  Set the flag for a modify a course with a new version.
-        //  Kinda feels we should just be setting the doc type and put the logic in the UI Helper.
-        if (ArrayUtils.contains(CurriculumManagementConstants.DocumentTypeNames.COURSE_MODIFY_DOC_TYPE_NAMES, docTypeName)) {
-            dataObject.getUiHelper().setModifyWithNewVersionProposal(true);
-        }
     }
 
     /**

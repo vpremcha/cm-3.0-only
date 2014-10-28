@@ -104,16 +104,6 @@
     <bean id="ksCommentAuthorDerivedRoleTypeService" class="org.kuali.student.lum.kim.role.type.CommentAuthorDerivedRoleTypeServiceImpl"/>
 
 <!--
-    <bean id="ksViewPermissionTypeService" class="org.kuali.student.enroll.kim.permission.type.KSViewPermissionTypeServiceImpl"/>
-    <bean id="ksViewActionPermissionTypeService" class="org.kuali.student.enroll.kim.permission.type.KSViewActionPermissionTypeServiceImpl"/>
-    <bean id="ksViewFieldPermissionTypeService" class="org.kuali.student.enroll.kim.permission.type.KSViewFieldPermissionTypeServiceImpl"/>
-    <bean id="ksViewGroupPermissionTypeService" class="org.kuali.student.enroll.kim.permission.type.KSViewGroupPermissionTypeServiceImpl"/>
-    <alias name="viewEditModePermissionTypeService" alias="ksViewEditModePermissionTypeService"/>
-    <alias name="viewWidgetPermissionTypeService" alias="ksViewWidgetPermissionTypeService"/>
-    <alias name="viewLineFieldPermissionTypeService" alias="ksViewLineFieldPermissionTypeService"/>
-    <alias name="viewLineActionPermissionTypeService" alias="ksViewLineActionPermissionTypeService"/>
--->
-<!--
     Any KS custom KIM Type Services need to be exposed to the service bus for use by the standalone Rice server so that the associated
         roles/perms/responsibilities can be edited by the KIM UI Screens. See JIRA KSENROLL-12258 for more information.
 -->

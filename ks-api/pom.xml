@@ -21,8 +21,6 @@
                 <module>ks-common-api</module>
                 <module>ks-core-api</module>
                 <module>ks-lum-api</module>
-                <module>ks-enroll-api</module>
-                <module>ks-ap-api</module>
             </modules>
         </profile>
         <profile>
@@ -47,8 +45,6 @@
                 <module>ks-common-api</module>
                 <module>ks-core-api</module>
                 <module>ks-lum-api</module>
-                <module>ks-enroll-api</module>
-                <module>ks-ap-api</module>
             </modules>
         </profile>
     </profiles>

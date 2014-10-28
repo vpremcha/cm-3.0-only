@@ -86,7 +86,7 @@ public class RetireCourseController extends ProposalController {
 
     @Override
     protected MaintenanceDocumentForm createInitialForm(HttpServletRequest request) {
-        MaintenanceDocumentForm form = new MaintenanceDocumentForm();
+        ProposalMaintenanceForm form = new ProposalMaintenanceForm();
 
         String useReviewProcessParam = request.getParameter(CurriculumManagementConstants.UrlParams.USE_CURRICULUM_REVIEW);
         // only do the manually setup of the MaintenanceDocumentForm fields if the USE_CURRICULUM_REVIEW param was passed in from initial view

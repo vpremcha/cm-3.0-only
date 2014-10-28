@@ -52,10 +52,7 @@ import org.kuali.student.common.object.KSObjectUtils;
 import org.kuali.student.common.util.security.ContextUtils;
 import org.kuali.student.lum.program.client.ProgramConstants;
 import org.kuali.student.r1.core.subjectcode.service.SubjectCodeService;
-import org.kuali.student.r2.common.dto.AttributeInfo;
-import org.kuali.student.r2.common.dto.DtoConstants;
-import org.kuali.student.r2.common.dto.RichTextInfo;
-import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.dto.*;
 import org.kuali.student.r2.common.util.AttributeHelper;
 import org.kuali.student.r2.core.proposal.dto.ProposalInfo;
 import org.kuali.student.r2.core.search.dto.SearchRequestInfo;
@@ -305,6 +302,31 @@ public class CourseController extends CourseRuleEditorController {
         //  set the Curriculum review status on the uiHelper
         courseInfoWrapper.getUiHelper().setUseReviewProcess(
                 request.getParameter(CurriculumManagementConstants.UrlParams.USE_CURRICULUM_REVIEW).equals(Boolean.TRUE.toString()));
+
+        //  If this is the draft course on a modify with new version then save the start term for the current version of the course.
+        //  This is used to constrain the list of start terms on the UI.
+        if (courseInfoWrapper.getCourseInfo().getStateKey().equals(DtoConstants.STATE_DRAFT)) {
+            String versionIndependentId = courseInfoWrapper.getCourseInfo().getVersion().getVersionIndId();
+            ContextInfo contextInfo = ContextUtils.createDefaultContextInfo();
+            CourseInfo currentVersion = null;
+            String startTermConstrainingTermId = null;
+            try {
+                currentVersion = CourseProposalUtil.getCurrentVersionOfCourse(versionIndependentId, contextInfo);
+                // kscm-2838 Check if current version has endTerm
+                if (currentVersion.getEndTerm() != null) {
+                    // set the constraining term to current version's endTerm
+                    startTermConstrainingTermId = currentVersion.getEndTerm();
+                }
+                else {
+                    // kscm-2838  Current version has no endTerm, so set the constraining term  to current version's startTerm
+                    startTermConstrainingTermId = currentVersion.getStartTerm();
+                }
+                courseInfoWrapper.setStartTermConstrainingTermId(startTermConstrainingTermId);
+            } catch (Exception e) {
+                LOG.error("Could not get current course for version.", e);
+            }
+            courseInfoWrapper.getUiHelper().setModifyWithNewVersionProposal(true);
+        }
 
         // Get the current version requisities and clear out all the ids so that requisites will be created new for this proposal.
         CourseInfo currentVersion = CourseProposalUtil.getCurrentVersionOfCourse(versionIndId,ContextUtils.createDefaultContextInfo());

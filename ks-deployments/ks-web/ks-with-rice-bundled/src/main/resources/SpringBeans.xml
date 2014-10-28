@@ -57,10 +57,7 @@
         <property name="collectionBeanReferences">
             <list>
                 <value>ks-core-dictionary-file-locations</value>
-                <value>ks-enroll-dictionary-file-locations</value>
                 <value>ks-cm-dictionary-file-locations</value>
-                <value>ks-ap-dictionary-file-locations</value>
-                <value>ks-fa-dictionary-file-locations</value>
             </list>
         </property>
     </bean>
@@ -68,12 +65,8 @@
     <!-- for diagnostic purposes to see which profiles are active -->
     <bean class="org.kuali.student.common.spring.DisplayActiveProfiles"/>
 
-
     <beans profile="ks-core">
-
         <import resource="classpath:ksb/ks-core-no-tx-context.xml"/>
-        <import resource="classpath:mq/ks-mq-context.xml"/>
-
         <import resource="classpath:ks-core-krad-data-dictionary-config.xml"/>
     </beans>
 
@@ -87,7 +80,6 @@
             <property name="allowCustomIsolationLevels" value="true"/>
         </bean>
     </beans>
-
 
     <beans profile="ks-web">
 
@@ -139,9 +131,5 @@
                 </map>
             </property>
         </bean>
-
     </beans>
-
-
-
 </beans>

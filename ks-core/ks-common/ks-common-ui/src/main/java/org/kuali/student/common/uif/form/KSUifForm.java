@@ -30,7 +30,6 @@ import org.kuali.student.r2.common.dto.MetaInfo;
 import org.kuali.student.r2.common.util.date.DateFormatters;
 import org.kuali.student.r2.common.util.date.KSDateTimeFormatter;
 
-import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;

@@ -579,7 +579,7 @@
     <!-- parent bean structure for Cancel button which should behave the same for both CS and regular users -->
     <bean id="CM-Proposal-Button-Cancel" parent="CM-Proposal-Button-Cancel-parentBean" />
     <bean id="CM-Proposal-Button-Cancel-parentBean" parent="Uif-ActionLink" abstract="true">
-        <property name="actionLabel" value="Cancel"/>
+        <property name="actionLabel" value="Close"/>
         <property name="methodToCall" value="back"/>
         <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CLOSE]}"/>
     </bean>
@@ -630,20 +630,22 @@
         </property>
     </bean>
 
-    <bean id="KS-Dialog" parent="KS-Dialog-parentBean" />
-    <bean id="KS-Dialog-parentBean" parent="Uif-DialogGroup" class="org.kuali.student.cm.uif.container.CMDialogGroup" abstract="true" >
+    <bean id="CM-Confirm-Dialog" parent="CM-Confirm-Dialog-parentBean" />
+    <bean id="CM-Confirm-Dialog-parentBean" parent="Uif-DialogGroup" class="org.kuali.student.cm.uif.container.CMDialogGroup" abstract="true" >
         <property name="renderHeader" value="true"/>
+        <property name="header">
+            <bean parent="Uif-HeaderTwo" p:cssClasses="ks-dottedHeaderActions"/>
+        </property>
         <property name="responseInputField">
             <bean parent="Uif-DialogResponse" p:readOnly="false"/>
         </property>
         <!-- do not show the explanation because we need the route node name dropdown above it in the dialog screen -->
         <property name="displayExplanation" value="false"/>
+        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
     </bean>
 
-    <bean id="KS-DottedHeaderTwo" parent="Uif-HeaderTwo" p:cssClasses="ks-dottedHeaderActions"/>
-
     <bean id="CM-Proposal-Review-ConfirmCancelProposal-Dialog" parent="CM-Proposal-Review-ConfirmCancelProposal-Dialog-parentBean" />
-    <bean id="CM-Proposal-Review-ConfirmCancelProposal-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmCancelProposal-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();submitCancelDialog();"/>
         <property name="headerText" value="Cancel Proposal"/>
         <property name="cssClasses">
@@ -662,7 +664,7 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmSubmit-Dialog" parent="CM-Proposal-Review-ConfirmSubmit-Dialog-parentBean" />
-    <bean id="CM-Proposal-Review-ConfirmSubmit-Dialog-parentBean" parent="KS-Dialog" abstract="true" >
+    <bean id="CM-Proposal-Review-ConfirmSubmit-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true" >
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('route');"/>
         <property name="headerText" value="Submit Proposal"/>
         <property name="cssClasses" >
@@ -681,12 +683,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmReturnToPreviousNode-Dialog" parent="CM-Proposal-Review-ConfirmReturnToPreviousNode-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmReturnToPreviousNode-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmReturnToPreviousNode-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('returnToPreviousNode');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Return Proposal to Previous Node"/>
-        </property>
+        <property name="headerText" value="Return Proposal to Previous Node"/>
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
@@ -724,12 +723,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmApprove-Dialog" parent="CM-Proposal-Review-ConfirmApprove-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmApprove-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmApprove-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('approve');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Approve Proposal"/>
-        </property>
+        <property name="headerText" value="Approve Proposal"/>
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
@@ -753,12 +749,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmBlanketApprove-Dialog" parent="CM-Proposal-Review-ConfirmBlanketApprove-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmBlanketApprove-Dialog-parentBean" parent="KS-Dialog" abstract="true" class="org.kuali.student.cm.uif.container.CMDialogGroup">
+    <bean id="CM-Proposal-Review-ConfirmBlanketApprove-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true" class="org.kuali.student.cm.uif.container.CMDialogGroup">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('blanketApprove');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Blanket Approve Proposal"/>
-        </property>
+        <property name="headerText" value="Blanket Approve Proposal" />
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
@@ -782,12 +775,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmReject-Dialog" parent="CM-Proposal-Review-ConfirmReject-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmReject-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmReject-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('disapprove');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Reject Proposal"/>
-        </property>
+        <property name="headerText" value="Reject Proposal" />
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
@@ -811,12 +801,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmAcknowledge-Dialog" parent="CM-Proposal-Review-ConfirmAcknowledge-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmAcknowledge-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmAcknowledge-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('acknowledge');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Acknowledge Proposal"/>
-        </property>
+        <property name="headerText" value="Acknowledge Proposal" />
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
@@ -841,12 +828,9 @@
     </bean>
 
     <bean id="CM-Proposal-Review-ConfirmWithdraw-Dialog" parent="CM-Proposal-Review-ConfirmWithdraw-Dialog-parentBean"/>
-    <bean id="CM-Proposal-Review-ConfirmWithdraw-Dialog-parentBean" parent="KS-Dialog" abstract="true">
+    <bean id="CM-Proposal-Review-ConfirmWithdraw-Dialog-parentBean" parent="CM-Confirm-Dialog" abstract="true">
         <property name="onDialogResponseScript" value="closeLightbox();ajaxSubmitForm('withdraw');"/>
-        <property name="OnShowDialogScript" value="skipDirtyChecks();" />
-        <property name="header">
-            <bean parent="KS-DottedHeaderTwo" p:headerText="Withdraw Proposal"/>
-        </property>
+        <property name="headerText" value="Withdraw Proposal"/>
         <property name="cssClasses" >
             <list merge="true">
                 <value>decisionrationale_dialog</value>
