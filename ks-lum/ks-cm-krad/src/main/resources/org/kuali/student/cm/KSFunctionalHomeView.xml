@@ -33,7 +33,7 @@
                             <bean parent="KS-Uif-Student-Home-Area-Image">
                                 <property name="source" value="@{#ConfigProperties['ks.externalizable.images.url']}/homepage/cm.png"/>
                             </bean>
-                            <bean parent="KS-Uif-Student-Home-Area-App-Name" p:headerText="Curriculum Management KRAD" />
+                            <bean parent="KS-Uif-Student-Home-Area-App-Name" p:headerText="Curriculum Management" />
                             <bean parent="Uif-Label" p:labelText="Create and Manage Catalog Courses and Programs" p:renderColon="false" />
                         </list>
                     </property>

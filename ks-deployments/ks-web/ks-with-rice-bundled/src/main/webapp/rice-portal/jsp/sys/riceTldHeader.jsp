@@ -22,6 +22,5 @@
 <%@ taglib tagdir="/WEB-INF/tags/rice-portal/channel/administration" prefix="administrationChannel"%>
 
 <%@ taglib tagdir="/WEB-INF/tags/rice-portal/channel/main" prefix="mainChannel"%>
-<%@ taglib tagdir="/WEB-INF/tags/rice-portal/channel/kitchensink" prefix="kitchensinkChannel"%>
 
 <%-- utility web functions --%>

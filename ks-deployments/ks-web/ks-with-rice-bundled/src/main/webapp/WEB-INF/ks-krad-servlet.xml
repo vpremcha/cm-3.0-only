@@ -55,13 +55,8 @@
 
   <beans profile="ks-core">
   	<context:component-scan base-package="org.kuali.student.common.uif" />
-  	<context:component-scan base-package="org.kuali.student.common.kitchensink" />
   </beans>
   
-  <beans profile="ks-ap">
- 	 <context:component-scan base-package="org.kuali.student.ap" />
-  </beans>
-
   <beans profile="ks-cm">
  	 <context:component-scan base-package="org.kuali.student.cm" />
   </beans>
