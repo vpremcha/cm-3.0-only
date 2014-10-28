@@ -27,7 +27,7 @@
     </bean>
     <bean id="KS-CurriculumHome-View" parent="KS-Uif-FormView">
         <property name="id" value="curriculumHomeView" />
-        <property name="headerText" value="Curriculum Management KRAD" />
+        <property name="headerText" value="Curriculum Management" />
         <property name="formClass" value="org.kuali.student.cm.main.form.CMHomeForm" />
         <property name="singlePageView" value="true" />
         <property name="breadcrumbOptions.homewardPathBreadcrumbs">
