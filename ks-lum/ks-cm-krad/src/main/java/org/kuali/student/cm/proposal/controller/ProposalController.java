@@ -46,7 +46,7 @@ import org.kuali.rice.krad.web.form.UifFormBase;
 import org.kuali.rice.krms.controller.RuleEditorController;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
 import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
-import org.kuali.student.cm.course.form.RecentlyViewedDocsUtil;
+import org.kuali.student.cm.common.util.RecentlyViewedDocsUtil;
 import org.kuali.student.cm.course.service.ExportCourseHelper;
 import org.kuali.student.cm.maintenance.CMMaintainable;
 import org.kuali.student.cm.proposal.form.wrapper.ProposalElementsWrapper;

@@ -18,13 +18,11 @@ package org.kuali.student.cm.main.form;
 import java.util.List;
 
 import org.kuali.rice.krad.web.form.UifFormBase;
-import org.kuali.student.cm.course.form.RecentlyViewedDocsUtil;
-import org.kuali.student.lum.common.client.helpers.RecentDocInfo;
+import org.kuali.student.cm.common.util.RecentDocInfo;
+import org.kuali.student.cm.common.util.RecentlyViewedDocsUtil;
 
 /**
- * 
- *
- * @author OpenCollab/rSmart KRAD CM Conversion Alliance!
+ * Form for the CM home page.
  */
 public class CMHomeForm extends UifFormBase {
     

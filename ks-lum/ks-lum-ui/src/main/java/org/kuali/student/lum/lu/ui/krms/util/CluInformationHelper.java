@@ -23,7 +23,7 @@ import org.kuali.student.lum.lu.ui.krms.dto.CluInformation;
 import org.kuali.student.lum.lu.ui.krms.dto.CluSetRangeInformation;
 import org.kuali.student.common.util.security.ContextUtils;
 import org.kuali.student.lum.lu.ui.krms.dto.CluSetWrapper;
-import org.kuali.student.lum.program.client.ProgramConstants;
+import org.kuali.student.lum.constants.ProgramConstants;
 import org.kuali.student.r2.common.exceptions.OperationFailedException;
 import org.kuali.student.r2.common.util.date.DateFormatters;
 import org.kuali.student.r2.core.search.dto.SearchRequestInfo;
@@ -136,7 +136,6 @@ public class CluInformationHelper {
      * Creates a new clusetrangeinformation wrapper object for each membershipquery that exist in the
      * wrapper cluset.
      *
-     * @param clusetInfo
      * @param mqInfo
      */
     private CluSetRangeInformation createCluSetRange(MembershipQueryInfo mqInfo) {

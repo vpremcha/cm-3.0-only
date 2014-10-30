@@ -65,7 +65,7 @@ import org.kuali.student.common.util.security.ContextUtils;
 import org.kuali.student.lum.lu.ui.course.keyvalues.OrgsBySubjectCodeValuesFinder;
 import org.kuali.student.lum.lu.ui.krms.dto.CluInformation;
 import org.kuali.student.lum.lu.ui.krms.util.CluInformationHelper;
-import org.kuali.student.lum.program.client.ProgramConstants;
+import org.kuali.student.lum.constants.ProgramConstants;
 import org.kuali.student.r1.core.personsearch.service.impl.QuickViewByGivenName;
 import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.AttributeInfo;

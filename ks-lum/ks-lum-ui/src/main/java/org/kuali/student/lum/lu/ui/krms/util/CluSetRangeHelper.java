@@ -20,13 +20,13 @@ import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krms.util.PropositionTreeUtil;
-import org.kuali.student.lum.common.client.lu.LUUIConstants;
 import org.kuali.student.lum.lu.ui.krms.dto.CluSetRangeInformation;
 import org.kuali.student.lum.lu.ui.krms.dto.CluSetRangeWrapper;
 import org.kuali.student.lum.lu.ui.krms.dto.LUPropositionEditor;
 import org.kuali.student.r2.common.util.date.DateFormatters;
 import org.kuali.student.r2.core.search.dto.SearchParamInfo;
 import org.kuali.student.r2.lum.clu.dto.MembershipQueryInfo;
+import org.kuali.student.r2.lum.util.constants.CluServiceConstants;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -153,7 +153,7 @@ public class CluSetRangeHelper implements Serializable {
 
         List<SearchParamInfo> queryParams = new ArrayList<SearchParamInfo>();
         queryParams.add(createSearchParam(CluSetRangeHelper.LO_SEARCH_PARM_LODESC, range.getLearningObjective()));
-        queryParams.add(createSearchParam(CluSetRangeHelper.LO_SEARCH_PARM_LUTYPE, LUUIConstants.CLU_TYPE_CREDIT_COURSE));
+        queryParams.add(createSearchParam(CluSetRangeHelper.LO_SEARCH_PARM_LUTYPE, CluServiceConstants.CREDIT_COURSE_LU_TYPE_KEY));
         membershipQueryInfo.setQueryParamValues(queryParams);
     }
 

@@ -50,7 +50,7 @@ import org.kuali.student.cm.proposal.form.wrapper.ProposalElementsWrapper;
 import org.kuali.student.cm.proposal.util.ProposalUtil;
 import org.kuali.student.common.object.KSObjectUtils;
 import org.kuali.student.common.util.security.ContextUtils;
-import org.kuali.student.lum.program.client.ProgramConstants;
+import org.kuali.student.lum.constants.ProgramConstants;
 import org.kuali.student.r1.core.subjectcode.service.SubjectCodeService;
 import org.kuali.student.r2.common.dto.*;
 import org.kuali.student.r2.common.util.AttributeHelper;
