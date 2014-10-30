@@ -16,19 +16,6 @@
     cost-effective system that can be configured to meet the business requirements of any higher education institution
   </description>
     <url>http://${kuali.site.hostname}/student/${project.version}/</url>
-    <repositories>
-        <repository>
-            <id>kuali.nexus</id>
-            <name>Nexus Repository Manager</name>
-            <url>http://nexus.kuali.org/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <ciManagement>
         <system>jenkins</system>
         <url>http://ci.kuali.org</url>
