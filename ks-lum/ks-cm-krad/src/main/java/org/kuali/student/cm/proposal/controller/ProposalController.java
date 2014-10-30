@@ -47,6 +47,7 @@ import org.kuali.rice.krms.controller.RuleEditorController;
 import org.kuali.student.cm.common.util.CurriculumManagementConstants;
 import org.kuali.student.cm.course.form.ProposalMaintenanceForm;
 import org.kuali.student.cm.common.util.RecentlyViewedDocsUtil;
+import org.kuali.student.cm.course.form.wrapper.CommonCourseDataWrapper;
 import org.kuali.student.cm.course.service.ExportCourseHelper;
 import org.kuali.student.cm.maintenance.CMMaintainable;
 import org.kuali.student.cm.proposal.form.wrapper.ProposalElementsWrapper;
@@ -69,6 +70,7 @@ import org.kuali.student.r2.core.constants.ProposalServiceConstants;
 import org.kuali.student.r2.core.document.dto.DocumentInfo;
 import org.kuali.student.r2.core.document.service.DocumentService;
 import org.kuali.student.r2.core.proposal.service.ProposalService;
+import org.kuali.student.r2.lum.course.dto.CourseInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -429,12 +431,30 @@ public abstract class ProposalController extends RuleEditorController {
             return modelAndView;
         }
 
-        RecentlyViewedDocsUtil.addRecentDoc(form.getDocument().getDocumentHeader().getDocumentDescription(),
-                form.getDocument().getDocumentHeader().getWorkflowDocument().getDocumentHandlerUrl() + "&"
-                        + KewApiConstants.COMMAND_PARAMETER + "="
-                        + KewApiConstants.DOCSEARCH_COMMAND + "&"
-                        + KewApiConstants.DOCUMENT_ID_PARAMETER + "="
-                        + form.getDocument().getDocumentHeader().getWorkflowDocument().getDocumentId());
+        String recentDocTitle = "";
+        /**
+         * For course proposal, display subject area + course number suffix at recently viewed docs list.
+         * If it's empty, dont display the recent docs list
+         * TODO: This logic is only applicable for R1 (view and modify existing). Needs to review this logic when we
+         * TODO: work on future releases which allows user to create proposals.
+         */
+        if (proposalElementsWrapper instanceof CommonCourseDataWrapper){
+            CourseInfo courseInfo = ((CommonCourseDataWrapper)proposalElementsWrapper).getCourseInfo();
+            String subjectArea = courseInfo.getSubjectArea();
+            String courseNumberSuffix = courseInfo.getCourseNumberSuffix();
+            if (StringUtils.isNotBlank(subjectArea) && StringUtils.isNotBlank(courseNumberSuffix)){
+                recentDocTitle = subjectArea + " " + courseNumberSuffix;
+            }
+        }
+
+        if (StringUtils.isNotBlank(recentDocTitle)) {
+            RecentlyViewedDocsUtil.addRecentDoc(form.getDocument().getDocumentHeader().getDocumentDescription(),
+                    form.getDocument().getDocumentHeader().getWorkflowDocument().getDocumentHandlerUrl() + "&"
+                            + KewApiConstants.COMMAND_PARAMETER + "="
+                            + KewApiConstants.DOCSEARCH_COMMAND + "&"
+                            + KewApiConstants.DOCUMENT_ID_PARAMETER + "="
+                            + form.getDocument().getDocumentHeader().getWorkflowDocument().getDocumentId());
+        }
 
         String nextOrCurrentPage = form.getActionParameters().get("displayPage");
 
