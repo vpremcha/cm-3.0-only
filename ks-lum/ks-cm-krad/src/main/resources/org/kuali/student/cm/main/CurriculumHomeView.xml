@@ -167,7 +167,7 @@
                 </bean>
                 <bean parent="Uif-ListCollectionSection">
                     <property name="collectionObjectClass"
-                              value="org.kuali.student.lum.common.client.helpers.RecentDocInfo" />
+                              value="org.kuali.student.cm.common.util.RecentDocInfo" />
                     <property name="propertyName" value="recentlyViewedDocs" />
                     <property name="items">
                         <list>
