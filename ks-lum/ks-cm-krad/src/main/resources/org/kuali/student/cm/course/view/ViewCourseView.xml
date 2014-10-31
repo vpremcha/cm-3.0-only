@@ -278,12 +278,14 @@
                 <ref bean="CM-ViewCourse-View-Course-NotCurentVersionSection"/>
                 <ref bean="CM-ViewCourse-View-Course-VersionNumberColumns"/>
                 <ref bean="CM-ViewCourse-View-Course-CourseInfoSection"/>
-                <ref bean="CM-ViewCourse-View-Course-GovernanceSection"/>
+                <!--CURMGMT-1309 - Hide non-UW fields-->
+                <!--<ref bean="CM-ViewCourse-View-Course-GovernanceSection"/>-->
                 <ref bean="CM-ViewCourse-View-Course-CourseLogisticsSection"/>
-                <ref bean="CM-ViewCourse-View-Course-LearningObjectivesSection"/>
-                <ref bean="CM-ViewCourse-View-Course-CourseRequisitesSection"/>
+                <!--CURMGMT-1309 - Hide non-UW fields-->
+                <!--<ref bean="CM-ViewCourse-View-Course-LearningObjectivesSection"/>-->
+                <!--<ref bean="CM-ViewCourse-View-Course-CourseRequisitesSection"/>-->
                 <ref bean="CM-ViewCourse-View-Course-ActiveDatesSection"/>
-                <ref bean="CM-ViewCourse-View-Course-FinancialsSection" />
+                <!--<ref bean="CM-ViewCourse-View-Course-FinancialsSection" />-->
             </list>
         </property>
     </bean>
@@ -497,8 +499,9 @@
                             <bean parent="CM-ReadOnlyInput" p:label="Jointly Offered Courses"
                                   id="CM-ViewCourseView-CourseInfo-JointlyOfferedCourses"
                                   p:propertyName="reviewProposalDisplay.courseSection.jointlyOfferedCoursesAsString"/>
-                            <bean parent="CM-ReadOnlyInput" p:label="Version Codes" id="CM-ViewCourseView-CourseInfo-Version-Codes"
-                                  p:propertyName="reviewProposalDisplay.courseSection.variationsAsString"/>
+                            <!--CURMGMT-1309 - Hide non-UW fields-->
+                            <!--<bean parent="CM-ReadOnlyInput" p:label="Version Codes" id="CM-ViewCourseView-CourseInfo-Version-Codes"
+                                  p:propertyName="reviewProposalDisplay.courseSection.variationsAsString"/>-->
                             <bean parent="CM-ReadOnlyInput" p:label="Instructor(s)" id="CM-ViewCourseView-CourseInfo-Instructors"
                                   p:propertyName="reviewProposalDisplay.courseSection.instructorsAsString"/>
                             <bean parent="CM-ReadOnlyInput" p:label="Description" id="CM-ViewCourseView-CourseInfo-Descr"
@@ -614,7 +617,8 @@
                                     </list>
                                 </property>
                             </bean>
-                            <bean parent="CM-ReadOnlyInput" p:label="Final Exam Status"
+                            <!--CURMGMT-1309 - Hide non-UW fields-->
+                            <!--<bean parent="CM-ReadOnlyInput" p:label="Final Exam Status"
                                   id="CM-ViewCourseView-Logistics-FinalExamStatus"
                                   p:propertyName="reviewProposalDisplay.courseLogisticsSection.finalExamStatus">
                                   <property name="simpleConstraint">
@@ -624,7 +628,7 @@
                             <bean parent="CM-ReadOnlyInput" p:label="Final Exam Rationale"
                                   id="CM-ViewCourseView-Logistics-FinalExamRationale"
                                   p:render="@{#form.viewId eq T(org.kuali.student.cm.common.util.CurriculumManagementConstants$CourseViewIds).CREATE_COURSE_VIEW}"
-                                  p:propertyName="reviewProposalDisplay.courseLogisticsSection.finalExamStatusRationale"/>
+                                  p:propertyName="reviewProposalDisplay.courseLogisticsSection.finalExamStatusRationale"/>-->
 
                             <!-- This bean gets rendered if the outComes collection has items. Otherwise, the one below does. -->
                             <bean parent="CM-ViewCourse-View-Course-OutcomeSection"/>
@@ -803,7 +807,8 @@
                         </list>
                     </property>-->
                 </bean>
-                <bean id="activity_durationCount" parent="CM-ReadOnlyInput" p:label="Duration" p:propertyName="durationCount" p:colSpan="1" />
+                <!--CURMGMT-1309 - Hide non-UW fields-->
+                <!--<bean id="activity_durationCount" parent="CM-ReadOnlyInput" p:label="Duration" p:propertyName="durationCount" p:colSpan="1" />-->
                 <bean id="activity_anticipatedClassSize" parent="CM-ReadOnlyInput" p:label="Anticipated Class Size"
                       p:propertyName="anticipatedClassSize"
                       p:colSpan="1" />

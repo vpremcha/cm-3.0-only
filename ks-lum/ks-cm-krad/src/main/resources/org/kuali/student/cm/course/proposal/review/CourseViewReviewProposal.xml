@@ -66,12 +66,12 @@
                 <ref bean="CM-Proposal-Review-Course-CourseSection"/>
                 <ref bean="CM-Proposal-Review-Course-GovernanceSection"/>
                 <ref bean="CM-Proposal-Review-Course-CourseLogisticsSection"/>
-                <ref bean="CM-Proposal-Review-Course-LearningObjectivesSection"/>
-                <ref bean="CM-Proposal-Review-Course-CourseRequisitesSection"/>
+                <!--<ref bean="CM-Proposal-Review-Course-LearningObjectivesSection"/>
+                <ref bean="CM-Proposal-Review-Course-CourseRequisitesSection"/>-->
                 <ref bean="CM-Proposal-Review-Course-ActiveDatesSection"/>
-                <ref bean="CM-Proposal-Review-Course-FinancialsSection"/>
+                <!--<ref bean="CM-Proposal-Review-Course-FinancialsSection"/>
                 <ref bean="CM-Proposal-Review-Course-AuthorsAndCollaboratorsSection"/>
-                <ref bean="CM-Proposal-Review-Course-SupportingDocumentsSection"/>
+                <ref bean="CM-Proposal-Review-Course-SupportingDocumentsSection"/>-->
                 <ref bean="CM-ExportHiddenField"/>
             </list>
         </property>
