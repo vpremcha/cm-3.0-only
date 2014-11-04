@@ -1940,7 +1940,8 @@ function showCommentLightboxUrl(href,overrideProps){
 function lookupOpenAction(){
 
     jQuery('#uLookupResults_layout tr').dblclick(function () {
-        var selectedIndex = jQuery(this).closest('tr').prevAll().length;
+        var table = jQuery("#uLookupResults_layout").DataTable();
+        var selectedIndex = table.fnGetPosition(this);
         submitForm("openAction",{"selectedIndex": "'" + selectedIndex + "'"});
     });
 

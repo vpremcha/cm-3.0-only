@@ -84,7 +84,7 @@ limitations under the License.
             </list>
         </property>
 
-        <property name="resultsGroup.renderLineActions" value="true"/>
+        <property name="resultsGroup.renderLineActions" value="false"/>
         <property name="resultsGroup.layoutManager.actionColumnPlacement" value="RIGHT"/>
 
         <property name="resultsGroup.layoutManager.richTable">
@@ -96,16 +96,6 @@ limitations under the License.
                 <entry key="aoColumnDefs"
                        value="[ {'aTargets':[0,1], 'bSortable':true} ]"/>
             </map>
-        </property>
-
-        <property name="resultsGroup.lineActions">
-            <list>
-                <!--<bean parent="KS-Uif-View-NavigationActionLink">
-                    <property name="id" value="@{#lp.code}_view"/>
-                    <property name="actionLabel" value="Course View"/>
-                    <property name="finalizeMethodToCall" value="buildViewCourseUrl"/>
-                </bean>-->
-            </list>
         </property>
 
         <property name="footer.items">

@@ -160,7 +160,11 @@ public class KSLookupController extends LookupController {
         if (lookupForm.getViewHelperService() instanceof KSLookupable){
             KSLookupable lookupable = (KSLookupable)lookupForm.getViewHelperService();
             String url = lookupable.generateOpenActionUrl(lookupForm,NumberUtils.toInt(selectedIndex));
-            return performRedirect(lookupForm,url);
+            if (StringUtils.isNotBlank(url)) {
+                return performRedirect(lookupForm, url);
+            } else{
+                return getUIFModelAndView(lookupForm);
+            }
         }
 
 
