@@ -109,7 +109,7 @@ limitations under the License.
 
         <property name="resultsGroup.lineActions">
             <list>
-              <bean parent="KS-Uif-View-NavigationActionLink">
+              <!--<bean parent="KS-Uif-View-NavigationActionLink">
                 <property name="id" value="@{#lp.name}_view"/>
                 <property name="actionLabel" value="Review Proposal"/>
                 <property name="finalizeMethodToCall" value="buildProposalActionLink"/>
@@ -126,7 +126,7 @@ limitations under the License.
                     </map>
                 </property>
                 <property name="render" value="@{#ViewHelper.allowsProposalOpenAction(#line)}"/>
-              </bean>
+              </bean>-->
               <bean parent="KS-Uif-Edit-NavigationActionLink">
                 <property name="id" value="@{#lp.name}_edit"/>
                 <property name="actionLabel" value="Edit"/>

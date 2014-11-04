@@ -36,4 +36,7 @@ public interface KSLookupable extends Lookupable {
     public void generateLookupResultsNotFoundMessage(Message message,Object model) ;
 
 
+    public String generateOpenActionUrl(Object model, int selectedIndex);
+
+
 }

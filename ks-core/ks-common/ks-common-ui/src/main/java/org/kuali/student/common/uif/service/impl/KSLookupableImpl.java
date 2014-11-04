@@ -106,4 +106,8 @@ public class KSLookupableImpl extends LookupableImpl implements KSLookupable {
         return messageFormat.format(args);
     }
 
+    public String generateOpenActionUrl(Object model, int selectedIndex){
+        return StringUtils.EMPTY;
+    }
+
 }

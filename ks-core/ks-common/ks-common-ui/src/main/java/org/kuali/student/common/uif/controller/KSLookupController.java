@@ -15,8 +15,8 @@
  */
 package org.kuali.student.common.uif.controller;
 
-import com.sun.corba.se.impl.logging.InterceptorsSystemException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.kuali.rice.core.api.exception.RiceRuntimeException;
 import org.kuali.rice.core.api.util.RiceConstants;
 import org.kuali.rice.core.api.util.RiceKeyConstants;
@@ -34,9 +34,12 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.KRADUtils;
 import org.kuali.rice.krad.util.UrlFactory;
+import org.kuali.rice.krad.web.controller.MethodAccessible;
 import org.kuali.rice.krad.web.form.UifFormBase;
+import org.kuali.student.common.uif.service.KSLookupable;
 import org.kuali.student.common.uif.view.KSLookupView;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -143,6 +146,27 @@ public class KSLookupController extends LookupController {
     }
 
 
+    @RequestMapping(params = "methodToCall=openAction")
+    @MethodAccessible
+    public ModelAndView openAction(@ModelAttribute("KualiForm") LookupForm lookupForm, BindingResult result,
+                                   HttpServletRequest request, HttpServletResponse response) {
+
+        String selectedIndex = StringUtils.remove(request.getParameter("selectedIndex"),"'");
+
+        if (!NumberUtils.isDigits(selectedIndex)){
+            throw new RuntimeException("selectedIndex is not a number.");
+        }
+
+        if (lookupForm.getViewHelperService() instanceof KSLookupable){
+            KSLookupable lookupable = (KSLookupable)lookupForm.getViewHelperService();
+            String url = lookupable.generateOpenActionUrl(lookupForm,NumberUtils.toInt(selectedIndex));
+            return performRedirect(lookupForm,url);
+        }
+
+
+        throw new RuntimeException("KSLookupable should be the allowed viewhelper service for openAction");
+
+    }
 
     @RequestMapping(method = RequestMethod.POST,params = "methodToCall=returnSelected")
     @Override

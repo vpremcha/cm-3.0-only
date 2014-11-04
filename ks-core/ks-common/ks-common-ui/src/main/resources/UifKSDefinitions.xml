@@ -140,6 +140,7 @@
                 <bean parent="KS-Uif-Lookup-MaintenanceReturnLink" p:order="20"/>
             </list>
         </property>
+        <property name="resultsGroup.onDocumentReadyScript" value="lookupOpenAction();"/>
         <!-- Removing property. Looks like Rice no longer supports it: KULRICE-10618
         <property name="resultsGroup.layoutManager.richTable.showSearchAndExportOptions" value="true" />
         -->

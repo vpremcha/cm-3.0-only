@@ -1934,4 +1934,15 @@ function showCommentLightboxUrl(href,overrideProps){
     showLightboxUrl(url, overrideProps);
 }
 
+/**
+ * UW implementation for CURMGMT-1297
+ */
+function lookupOpenAction(){
+
+    jQuery('#uLookupResults_layout tr').dblclick(function () {
+        var selectedIndex = jQuery(this).closest('tr').prevAll().length;
+        submitForm("openAction",{"selectedIndex": "'" + selectedIndex + "'"});
+    });
+
+}
 

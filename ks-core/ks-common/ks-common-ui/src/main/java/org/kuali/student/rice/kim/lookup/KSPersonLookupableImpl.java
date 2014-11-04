@@ -104,4 +104,9 @@ public class KSPersonLookupableImpl extends PersonLookupableImpl implements KSLo
         ksLookupable.generateLookupResultsNotFoundMessage(message,model);
     }
 
+    @Override
+    public String generateOpenActionUrl(Object model, int selectedIndex) {
+        return null;
+    }
+
 }

@@ -123,6 +123,16 @@ public class CourseLookupableImpl extends KSLookupableImpl implements CourseLook
         actionLink.setActionScript("window.open('" + href + "', '_self');");
     }
 
+    public String generateOpenActionUrl(Object model, int selectedIndex){
+
+        LookupForm form = (LookupForm)model;
+
+        CluInformation[] result = form.getLookupResults().toArray (new CluInformation[form.getLookupResults().size ()]);
+
+
+        return CourseProposalUtil.getViewCourseUrl(result[selectedIndex].getCluId());
+    }
+
     protected CluService getCluService() {
         if (cluService == null) {
             cluService = GlobalResourceLoader.getService(new QName(CluServiceConstants.CLU_NAMESPACE, CluServiceConstants.SERVICE_NAME_LOCAL_PART));

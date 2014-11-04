@@ -100,11 +100,11 @@ limitations under the License.
 
         <property name="resultsGroup.lineActions">
             <list>
-                <bean parent="KS-Uif-View-NavigationActionLink">
+                <!--<bean parent="KS-Uif-View-NavigationActionLink">
                     <property name="id" value="@{#lp.code}_view"/>
                     <property name="actionLabel" value="Course View"/>
                     <property name="finalizeMethodToCall" value="buildViewCourseUrl"/>
-                </bean>
+                </bean>-->
             </list>
         </property>
 
